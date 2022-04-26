@@ -139,13 +139,6 @@ var (
 // ConnectDB connect to db
 func ConnectDB() {
 	var err error
-	if os.Getenv("DATABASE_CLUSTER") == "" {
-		ClusterName = "ezugi"
-		Sports01DBName = "sports01"
-		UserName = "satya"
-		UserPswd = "ecYuTiv8tjFsv8Jo"
-		ConnectionURL2 = "mongodb+srv://%s:%s@%s.mdwax.mongodb.net/%s?retryWrites=true&w=majority"
-	}
 
 	// MongoDB Connection
 	connectionURL := fmt.Sprintf(ConnectionURL2, UserName, UserPswd, ClusterName, Sports01DBName)
