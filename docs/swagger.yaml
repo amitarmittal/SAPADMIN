@@ -1,0 +1,6219 @@
+basePath: /api/v1
+definitions:
+  Sp_dto_core.GetEventsReqDto:
+    properties:
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      token:
+        type: string
+    type: object
+  Sp_dto_core.GetEventsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      sports:
+        items:
+          $ref: '#/definitions/dto.EventDto'
+        type: array
+      status:
+        type: string
+    type: object
+  Sp_dto_core.GetMarketsReqDto:
+    properties:
+      eventId:
+        type: string
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      token:
+        type: string
+    type: object
+  Sp_dto_core.GetMarketsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      event:
+        $ref: '#/definitions/dto.EventDto'
+      status:
+        type: string
+    type: object
+  Sp_dto_portal.GetEventsReqDto:
+    properties:
+      EventId:
+        type: string
+      competitionId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  Sp_dto_portal.GetEventsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      events:
+        items:
+          $ref: '#/definitions/dto.Event'
+        type: array
+      status:
+        type: string
+    type: object
+  Sp_dto_portal.GetMarketsReqDto:
+    properties:
+      eventId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  Sp_dto_portal.GetMarketsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      markets:
+        items:
+          $ref: '#/definitions/models.Market'
+        type: array
+      status:
+        type: string
+    type: object
+  commondto.ConfigDto:
+    properties:
+      bookmaker:
+        $ref: '#/definitions/commondto.Features'
+      fancy:
+        $ref: '#/definitions/commondto.Features'
+      hold:
+        type: number
+      isSet:
+        type: boolean
+      matchOdds:
+        $ref: '#/definitions/commondto.Features'
+    type: object
+  commondto.Features:
+    properties:
+      delay:
+        type: number
+      max:
+        type: integer
+      min:
+        type: integer
+      oddLimits:
+        type: integer
+    type: object
+  commondto.GetOperDetailReqDto:
+    properties:
+      competitionId:
+        type: string
+      eventId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  commondto.GetOperDetailRespDto:
+    properties:
+      errorDescription:
+        type: string
+      providers:
+        items:
+          $ref: '#/definitions/commondto.OperatorStatus'
+        type: array
+      status:
+        type: string
+    type: object
+  commondto.GetSportsReqDto:
+    properties:
+      operatorId:
+        description: optional for portal users
+        type: string
+      partnerId:
+        type: string
+      providerId:
+        description: mandatory.
+        type: string
+      token:
+        description: optional for portal users
+        type: string
+    type: object
+  commondto.GetSportsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      sports:
+        items:
+          $ref: '#/definitions/commondto.SportDto'
+        type: array
+      status:
+        type: string
+    type: object
+  commondto.OperStatusInCompetitionReqDto:
+    properties:
+      competitionId:
+        type: string
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      status:
+        type: string
+    type: object
+  commondto.OperStatusInEventReqDto:
+    properties:
+      eventId:
+        type: string
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      status:
+        type: string
+    type: object
+  commondto.OperStatusInProviderReqDto:
+    properties:
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      providerId:
+        type: string
+      status:
+        type: string
+    type: object
+  commondto.OperStatusInSportReqDto:
+    properties:
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      status:
+        type: string
+    type: object
+  commondto.OperStatusRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  commondto.OperStatusUnblockReqDto:
+    properties:
+      competitionId:
+        type: string
+      eventId:
+        type: string
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  commondto.OperStatusUnblockRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  commondto.OperatorStatus:
+    properties:
+      OperatorId:
+        type: string
+      isActive:
+        type: string
+      operatorName:
+        type: string
+      partnerId:
+        type: string
+    type: object
+  commondto.SportDto:
+    properties:
+      sportId:
+        type: string
+      sportName:
+        type: string
+    type: object
+  commondto.SyncSportsReqDto:
+    properties:
+      providerId:
+        type: string
+    type: object
+  dto.AddPartnerReqDto:
+    properties:
+      operatorId:
+        type: string
+      partner:
+        $ref: '#/definitions/operatordto.Partner'
+    type: object
+  dto.AllMarketsDto:
+    properties:
+      bookmakers:
+        items:
+          $ref: '#/definitions/dto.MatchOddsDto'
+        type: array
+      fancyMarkets:
+        items:
+          $ref: '#/definitions/dto.FancyMarketDto'
+        type: array
+      matchOdds:
+        items:
+          $ref: '#/definitions/dto.MatchOddsDto'
+        type: array
+    type: object
+  dto.AuthReqDto:
+    properties:
+      clientIp:
+        type: string
+      currency:
+        description: can be ENUM
+        type: string
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      platformId:
+        description: can be ENUM
+        type: string
+      userId:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.AuthRespDto:
+    properties:
+      errorDescription:
+        type: string
+      providers:
+        items:
+          $ref: '#/definitions/dto.ProviderDto'
+        type: array
+      status:
+        type: string
+      token:
+        type: string
+      url:
+        type: string
+      userId:
+        type: string
+    type: object
+  dto.BlockedCompReqDto:
+    properties:
+      competitionId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.BlockedCompResqDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.BlockedEventReqDto:
+    properties:
+      competitionId:
+        type: string
+      eventId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.BlockedEventResqDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.BlockedSportReqDto:
+    properties:
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.BlockedSportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.CloseEventsReqDto:
+    properties:
+      eventIds:
+        items:
+          type: string
+        type: array
+    type: object
+  dto.CommonPortalRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.CompReqDto:
+    properties:
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.CompRespDto:
+    properties:
+      Competition:
+        description: 'TODO: Add competitions DTO once it is created'
+        items:
+          $ref: '#/definitions/dto.Competition'
+        type: array
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.Competition:
+    properties:
+      CompetitionId:
+        type: string
+      CompetitionName:
+        type: string
+      status:
+        description: active / blocked / deleted
+        type: string
+    type: object
+  dto.Event:
+    properties:
+      Status:
+        type: string
+      competitionId:
+        type: string
+      competitionName:
+        type: string
+      eventId:
+        type: string
+      eventName:
+        type: string
+      favourite:
+        type: boolean
+      openDate:
+        description: Unix milliseconds
+        type: integer
+      providerId:
+        type: string
+      sportName:
+        type: string
+      sportsId:
+        type: string
+    type: object
+  dto.EventDto:
+    properties:
+      awayScore:
+        type: number
+      competitionId:
+        type: string
+      competitionName:
+        type: string
+      eventId:
+        type: string
+      eventName:
+        type: string
+      homeScore:
+        type: number
+      marketId:
+        type: string
+      markets:
+        $ref: '#/definitions/dto.AllMarketsDto'
+      openDate:
+        type: integer
+      providerName:
+        type: string
+      sportId:
+        type: string
+      sportName:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.FancyMarketDto:
+    properties:
+      category:
+        type: string
+      limits:
+        $ref: '#/definitions/dto.LimitsDto'
+      marketId:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      noRate:
+        type: number
+      noValue:
+        type: number
+      status:
+        type: string
+      yesRate:
+        type: number
+      yesValue:
+        type: number
+    type: object
+  dto.GetBetReqDto:
+    properties:
+      operatorId:
+        description: mandatory
+        type: string
+      transactionId:
+        description: mandatory
+        type: string
+    type: object
+  dto.GetLiveEventsReqDto:
+    properties:
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      providerId:
+        type: string
+      token:
+        type: string
+    type: object
+  dto.GetLiveEventsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      sports:
+        items:
+          $ref: '#/definitions/dto.EventDto'
+        type: array
+      status:
+        type: string
+    type: object
+  dto.GetMarketStatusRespDto:
+    properties:
+      errorDescription:
+        type: string
+      marketStatus:
+        items:
+          $ref: '#/definitions/models.MarketStatus'
+        type: array
+      status:
+        type: string
+    type: object
+  dto.GetOpMarketsReqDto:
+    properties:
+      eventId:
+        type: string
+      marketId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.GetOperatorsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      operators:
+        items:
+          $ref: '#/definitions/dto.Operator'
+        type: array
+      status:
+        type: string
+    type: object
+  dto.GetUsersReqDto:
+    properties:
+      page:
+        description: optional. Empty value will bring latest results sort by date
+          descending.
+        type: integer
+      pageSize:
+        description: optional. Empty value will bring 50 records. Value can't be more
+          than 50.
+        type: integer
+      partialUserName:
+        description: optional.
+        type: string
+    type: object
+  dto.LimitsDto:
+    properties:
+      currency:
+        type: string
+      maxBetValue:
+        type: number
+      minBetValue:
+        type: number
+      oddsLimit:
+        type: number
+    type: object
+  dto.ListUsersRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+      users:
+        items:
+          $ref: '#/definitions/dto.UserDto'
+        type: array
+    type: object
+  dto.MatchOddsDto:
+    properties:
+      limits:
+        $ref: '#/definitions/dto.LimitsDto'
+      marketId:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      runners:
+        items:
+          $ref: '#/definitions/dto.RunnerDto'
+        type: array
+      status:
+        type: string
+    type: object
+  dto.OpenBetDto:
+    properties:
+      betId:
+        type: string
+      betTime:
+        type: integer
+      betType:
+        type: string
+      eventId:
+        type: string
+      isUnmatched:
+        type: boolean
+      marketId:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      oddValue:
+        type: number
+      operatorId:
+        type: string
+      runnerId:
+        type: string
+      runnerName:
+        type: string
+      sessionOutcome:
+        type: number
+      sportId:
+        type: string
+      stakeAmount:
+        type: number
+      userId:
+        type: string
+    type: object
+  dto.OpenBetsReqDto:
+    properties:
+      eventId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.OpenBetsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      openBets:
+        items:
+          $ref: '#/definitions/dto.OpenBetDto'
+        type: array
+      status:
+        type: string
+    type: object
+  dto.Operator:
+    properties:
+      balance:
+        type: number
+      base_url:
+        type: string
+      config:
+        $ref: '#/definitions/commondto.ConfigDto'
+      currency:
+        type: string
+      operator_id:
+        type: string
+      operator_name:
+        type: string
+      operatorKey:
+        type: string
+      publicKey:
+        type: string
+      status:
+        description: ACTIVE / BLOCKED
+        type: string
+      wallet_type:
+        description: Seamless / Transfer / Feed
+        type: string
+    type: object
+  dto.PortalLoginReqDto:
+    properties:
+      ip:
+        type: string
+      password:
+        type: string
+      userId:
+        type: string
+    type: object
+  dto.PortalLoginRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+      token:
+        type: string
+    type: object
+  dto.PriceDto:
+    properties:
+      price:
+        type: number
+      size:
+        type: number
+    type: object
+  dto.ProviderDto:
+    properties:
+      providerId:
+        type: string
+      providerName:
+        type: string
+      status:
+        type: string
+      url:
+        type: string
+    type: object
+  dto.RunnerDto:
+    properties:
+      backPrices:
+        items:
+          $ref: '#/definitions/dto.PriceDto'
+        type: array
+      layPrices:
+        items:
+          $ref: '#/definitions/dto.PriceDto'
+        type: array
+      runnerId:
+        type: string
+      runnerName:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.Sport:
+    properties:
+      SportId:
+        type: string
+      SportName:
+        type: string
+      partnerId:
+        type: string
+      status:
+        description: active / blocked / deleted
+        type: string
+    type: object
+  dto.SportsReqDto:
+    properties:
+      providerId:
+        type: string
+    type: object
+  dto.SportsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      sports:
+        items:
+          $ref: '#/definitions/dto.Sport'
+        type: array
+      status:
+        type: string
+    type: object
+  dto.UnblockedCompReqDto:
+    properties:
+      competitionId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.UnblockedCompResqDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.UnblockedEventReqDto:
+    properties:
+      competitionId:
+        type: string
+      eventId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.UnblockedEventResqDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.UnblockedSportReqDto:
+    properties:
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.UnblockedSportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  dto.UpdateMarketsReqDto:
+    properties:
+      eventId:
+        type: string
+      marketId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.UpdateOpMarketsReqDto:
+    properties:
+      eventId:
+        type: string
+      marketId:
+        type: string
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  dto.UserDto:
+    properties:
+      userId:
+        type: string
+      userName:
+        type: string
+    type: object
+  dto.UserStatementReqDto:
+    properties:
+      endDate:
+        description: optional. Date in unix format.
+        type: integer
+      operatorId:
+        description: mandatory
+        type: string
+      page:
+        description: optional. Empty value will bring latest results sort by date
+          descending.
+        type: integer
+      pageSize:
+        description: optional. Empty value will bring 50 records. Value can't be more
+          than 50.
+        type: integer
+      startDate:
+        description: optional. Date in unix format.
+        type: integer
+      transactionType:
+        description: optional. Valid values are FUNDS / BETS
+        type: string
+      userId:
+        description: mandatory
+        type: string
+    type: object
+  dto.UserStatementRespDto:
+    properties:
+      Transactions:
+        items:
+          $ref: '#/definitions/dto.UserTransaction'
+        type: array
+      balance:
+        type: number
+      errorDescription:
+        type: string
+      page:
+        description: Current Page number
+        type: integer
+      pageSize:
+        description: Bets count in Bets Array
+        type: integer
+      status:
+        type: string
+      totalRecords:
+        description: Total bet count which matched the filtered query
+        type: integer
+    type: object
+  dto.UserTransaction:
+    properties:
+      amount:
+        description: +ve value added to user, -ve values deducted from user
+        type: number
+      competitionName:
+        type: string
+      eventName:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      referenceId:
+        type: string
+      remark:
+        type: string
+      transactionTime:
+        description: unix time in milliseconds
+        type: integer
+      transactionType:
+        type: string
+    type: object
+  models.Market:
+    properties:
+      category:
+        description: applicable for Fancy Markets
+        type: string
+      competitionId:
+        description: IPL, BBL
+        type: string
+      competitionName:
+        description: IPL, BBL
+        type: string
+      config:
+        $ref: '#/definitions/commondto.ConfigDto'
+      createdAt:
+        description: DateTime in Unix seconds
+        type: integer
+      eventId:
+        description: Unique event id
+        type: string
+      eventKey:
+        description: ProviderId+"-"+SportId+"-"+EventId+"-"
+        type: string
+      eventName:
+        description: IPL / BBL / IC T20 WC
+        type: string
+      favourite:
+        description: False - non-favourite. Default is False
+        type: boolean
+      id:
+        type: string
+      isSuspended:
+        description: to SUSPEND / RESUME markets.
+        type: boolean
+      marketId:
+        description: Unique Id of the market
+        type: string
+      marketKey:
+        description: ProviderId+"-"+SportId+"-"+EventId+"-"+MarketId
+        type: string
+      marketName:
+        description: Name of Market
+        type: string
+      marketStatus:
+        description: OPEN / MAPPED / INPROGRESS / SETTLED / VOIDED / CANCELLED / SUSPENDED
+        type: string
+      marketType:
+        description: Market Type
+        type: string
+      providerId:
+        description: Dream / BetFair / SportRadar
+        type: string
+      providerName:
+        description: Dream Sports / Bet Fair / Sport Radar
+        type: string
+      results:
+        items:
+          $ref: '#/definitions/models.Result'
+        type: array
+      rollbacks:
+        items:
+          $ref: '#/definitions/models.Rollback'
+        type: array
+      runners:
+        items:
+          $ref: '#/definitions/models.Runner'
+        type: array
+      sportId:
+        description: 1 / 2 / 4
+        type: string
+      sportName:
+        description: Soccer / Tennis / Cricket
+        type: string
+      status:
+        description: ACTIVE / BLOCKED
+        type: string
+      updatedAt:
+        description: DateTime in Unix seconds
+        type: integer
+    type: object
+  models.MarketStatus:
+    properties:
+      competitionId:
+        type: string
+      competitionName:
+        description: IPL / BBL / ICC T20 WC
+        type: string
+      config:
+        $ref: '#/definitions/commondto.ConfigDto'
+        description: Configuration for the event
+      createdAt:
+        description: DateTime in Unix seconds
+        type: integer
+      eventId:
+        type: string
+      eventKey:
+        description: OperatorId+"-"+ProviderId+"-"+SportId+"-"+EventId
+        type: string
+      eventName:
+        description: IPL / BBL / ICC T20 WC
+        type: string
+      favourite:
+        description: False - non-favourite. Default is False
+        type: boolean
+      id:
+        type: string
+      isCommission:
+        description: Default false, NO commission
+        type: boolean
+      marketId:
+        description: Unique Id of the market
+        type: string
+      marketKey:
+        description: OperatorId+"-"+ProviderId+"-"+SportId+"-"+EventId+"-"+MarketId
+        type: string
+      marketName:
+        description: Name of Market
+        type: string
+      marketType:
+        description: Market Type
+        type: string
+      operatorId:
+        description: Operator Id for that operator
+        type: string
+      operatorName:
+        description: Operator Name for that operator
+        type: string
+      operatorStatus:
+        description: Operator swatich to block for themselve, Default BLOCKED
+        type: string
+      providerId:
+        description: Dream / BetFair / SportRadar
+        type: string
+      providerName:
+        description: Dream Sports / Bet Fair / Sport Radar
+        type: string
+      providerStatus:
+        description: Provider swtich to block to a particular operator, Default BLOCKED
+        type: string
+      sportId:
+        description: 1 / 2 / 4
+        type: string
+      sportName:
+        description: Soccer / Tennis / Cricket
+        type: string
+      updatedAt:
+        description: DateTime in Unix Seconds
+        type: integer
+      winCommission:
+        description: if enabled, default (minimum) is 2%
+        type: number
+    type: object
+  models.Result:
+    properties:
+      resultTime:
+        type: integer
+      runnerId:
+        type: string
+      runnerName:
+        type: string
+      sessionOutcome:
+        description: 'fancy scrore ex: 45 NO, 46 YES'
+        type: number
+    type: object
+  models.Rollback:
+    properties:
+      rollbackReason:
+        type: string
+      rollbackTime:
+        type: integer
+      rollbackType:
+        type: string
+    type: object
+  models.Runner:
+    properties:
+      runnerId:
+        type: string
+      runnerName:
+        type: string
+      runnerStatus:
+        type: string
+    type: object
+  operatordto.BetHistory:
+    properties:
+      betAmount:
+        description: Debit Amount
+        type: number
+      betId:
+        description: Unique Bet Id
+        type: string
+      betReq:
+        $ref: '#/definitions/operatordto.BetReq'
+        description: Bet Request information. Refer inner details
+      betResults:
+        description: Array of Bet Results information. Refer inner details
+        items:
+          $ref: '#/definitions/operatordto.BetResult'
+        type: array
+      betRollbacks:
+        description: Array of Bet Rollback information. Refer inner details
+        items:
+          $ref: '#/definitions/operatordto.BetRollback'
+        type: array
+      betTime:
+        description: Bet Placement Time
+        type: integer
+      competitionName:
+        description: Competition / League name to display
+        type: string
+      eventId:
+        description: Event Id
+        type: string
+      eventName:
+        description: Event / Match name to display
+        type: string
+      marketName:
+        description: Market Name to display
+        type: string
+      marketType:
+        description: Market Type
+        type: string
+      providerName:
+        description: Sports provider name to display
+        type: string
+      sportName:
+        description: Sport Name to display
+        type: string
+      status:
+        description: Bet status. Open / Settled / Void
+        type: string
+      updatedAt:
+        description: Last update time in unix format
+        type: integer
+      userId:
+        description: Unique to Operator
+        type: string
+      userIp:
+        description: User's device IP
+        type: string
+      userName:
+        description: User's Friendly name to display
+        type: string
+      wonAmount:
+        description: CreditAmount + RollbackAmount - DebitAmount. A positive number
+          is a user win.
+        type: number
+    type: object
+  operatordto.BetReq:
+    properties:
+      betOdds:
+        description: 'Odd value. Ex: 1.86'
+        type: number
+      betStake:
+        description: Bet Stake amount entered in the bet slip
+        type: number
+      betTime:
+        description: Bet Placement Time
+        type: integer
+      betType:
+        description: BACK or LAY bet
+        type: string
+      runnerName:
+        description: Expected outcome for MATCH_ODDS and BOOKMAKER markets, Market
+          Name for FANCY markets
+        type: string
+      sessionOutcome:
+        description: Expected outcome for FANCY
+        type: number
+      unifiedOdds:
+        description: MatchOdds style odds
+        type: number
+    type: object
+  operatordto.BetResult:
+    properties:
+      resultTime:
+        description: Result announced time
+        type: integer
+      runnerName:
+        description: Actual outcome for MATCH_ODDS and BOOKMAKER markets, Market Name
+          for FANCY markets
+        type: string
+      sessionOutcome:
+        description: Actual outcome for FANCY
+        type: number
+      winAmount:
+        description: User win amount
+        type: number
+    type: object
+  operatordto.BetRollback:
+    properties:
+      rollbackAmount:
+        description: Roolback amount. +ve value to add to user balance, -ve value
+          to deduct from user balance
+        type: number
+      rollbackReason:
+        description: Rollback Reason
+        type: string
+      rollbackTime:
+        description: Rollback anounced time
+        type: integer
+    type: object
+  operatordto.BetsHistoryReqDto:
+    properties:
+      endDate:
+        description: optional. Date in unix format.
+        type: integer
+      eventId:
+        description: optional. Empty value to get bets across all sports
+        type: string
+      filterBy:
+        description: optional. Posible values are 'CreatedAt' and 'UpdatedAt'. Default
+          is 'CreatedAt'
+        type: string
+      operatorId:
+        description: Mandatory.
+        type: string
+      page:
+        description: optional. Empty value will bring latest results sort by date
+          descending.
+        type: integer
+      pageSize:
+        description: optional. Empty value will bring 50 records. Value can't be more
+          than 50.
+        type: integer
+      providerId:
+        description: optional. Empty value to get bets across all providers
+        type: string
+      sportId:
+        description: optional. Empty value to get bets across all sports
+        type: string
+      startDate:
+        description: optional. Date in unix format.
+        type: integer
+      status:
+        description: optional. Empty value to get all. // OPEN / SETTLED / VOID /
+          UNMATCHED / CANCEL / DELETED
+        type: string
+      transactionIds:
+        description: optional. Empty value to get bets across all sports
+        items:
+          type: string
+        type: array
+      userId:
+        description: optional. Empty value to get all user bets
+        type: string
+    type: object
+  operatordto.BetsHistoryRespDto:
+    properties:
+      bets:
+        description: Array of Bets based on filtered query
+        items:
+          $ref: '#/definitions/operatordto.BetHistory'
+        type: array
+      errorDescription:
+        description: Failure reason
+        type: string
+      page:
+        description: Current Page number
+        type: integer
+      pageSize:
+        description: Bets count in Bets Array
+        type: integer
+      status:
+        description: Request Status. "RS_OK" for Success, "RS_ERROR" for Failure
+        type: string
+      totalRecords:
+        description: Total bet count which matched the filtered query
+        type: integer
+    type: object
+  operatordto.DepositReqDto:
+    properties:
+      creditAmount:
+        type: number
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      remark:
+        type: string
+      userId:
+        type: string
+    type: object
+  operatordto.DepositRespDto:
+    properties:
+      balance:
+        type: number
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  operatordto.GetBetRespDto:
+    properties:
+      betDetails:
+        $ref: '#/definitions/operatordto.BetHistory'
+        description: Bet Details
+      errorDescription:
+        description: Failure reason
+        type: string
+      status:
+        description: Request Status. "RS_OK" for Success, "RS_ERROR" for Failure
+        type: string
+    type: object
+  operatordto.Partner:
+    properties:
+      commission:
+        type: number
+      currency:
+        description: INR / HKD / USD
+        type: string
+      partnerId:
+        type: string
+      rate:
+        type: integer
+      status:
+        description: ACTIVE / BLOCKED / SUSPENDED / DEACTIVATED
+        type: string
+    type: object
+  operatordto.UserBalanceReqDto:
+    properties:
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      userId:
+        type: string
+    type: object
+  operatordto.UserBalanceRespDto:
+    properties:
+      balance:
+        type: number
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  operatordto.UserStatementReqDto:
+    properties:
+      endTime:
+        type: integer
+      operatorId:
+        type: string
+      referenceId:
+        type: string
+      startTime:
+        type: integer
+      token:
+        type: string
+      userId:
+        type: string
+    type: object
+  operatordto.WithdrawReqDto:
+    properties:
+      debitAmount:
+        type: number
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      remark:
+        type: string
+      userId:
+        type: string
+    type: object
+  operatordto.WithdrawRespDto:
+    properties:
+      balance:
+        type: number
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  reports.AdminStatement:
+    properties:
+      amount:
+        type: number
+      from_to:
+        type: string
+      my_share:
+        type: number
+      points:
+        type: number
+      settlement_time:
+        type: integer
+      status:
+        type: string
+      transaction_id:
+        type: string
+    type: object
+  reports.AdminStatementReqDto:
+    properties:
+      end_time:
+        type: number
+      start_time:
+        type: number
+      status:
+        type: string
+      user_name:
+        type: string
+    type: object
+  reports.AdminStatementRespDto:
+    properties:
+      adminStatement:
+        items:
+          $ref: '#/definitions/reports.AdminStatement'
+        type: array
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  reports.BetDetailReportReqDto:
+    properties:
+      transactionId:
+        type: string
+    type: object
+  reports.BetDetailReportRespDto:
+    properties:
+      betReportDetail:
+        $ref: '#/definitions/reports.BetReportDetail'
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  reports.BetList:
+    properties:
+      betTime:
+        type: integer
+      betType:
+        type: string
+      currency:
+        type: string
+      eventName:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      netAmount:
+        type: number
+      odds:
+        type: number
+      operatorAmount:
+        type: number
+      operatorHold:
+        type: number
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      rate:
+        type: integer
+      runnerName:
+        type: string
+      sessionOutcome:
+        type: number
+      sportName:
+        type: string
+      stake:
+        type: number
+      status:
+        type: string
+      transactionId:
+        type: string
+      userName:
+        type: string
+    type: object
+  reports.BetListReqDto:
+    properties:
+      endTime:
+        type: number
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      sportName:
+        type: string
+      startTime:
+        type: number
+      status:
+        type: string
+      userId:
+        type: string
+    type: object
+  reports.BetListRespDto:
+    properties:
+      betList:
+        items:
+          $ref: '#/definitions/reports.BetList'
+        type: array
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  reports.BetReportDetail:
+    properties:
+      betId:
+        type: string
+      betStatus:
+        type: string
+      betType:
+        type: string
+      lapsedAmount:
+        type: number
+      lapsedTime:
+        type: integer
+      marketResult:
+        $ref: '#/definitions/models.Result'
+      odds:
+        type: number
+      resultTime:
+        type: integer
+    type: object
+  reports.CompetitionPnLReport:
+    properties:
+      betCount:
+        type: integer
+      competitionId:
+        type: string
+      competitionName:
+        type: string
+      eventId:
+        type: string
+      eventName:
+        type: string
+      profitLoss:
+        type: number
+    type: object
+  reports.CompetitionPnLReportReqDto:
+    properties:
+      competitionId:
+        type: string
+      endTime:
+        type: number
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      startTime:
+        type: number
+      userId:
+        type: string
+    type: object
+  reports.CompetitionPnLReportRespDto:
+    properties:
+      competitionId:
+        type: string
+      competitionPnLReport:
+        items:
+          $ref: '#/definitions/reports.CompetitionPnLReport'
+        type: array
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  reports.EventPnLReport:
+    properties:
+      betCount:
+        type: integer
+      eventId:
+        type: string
+      eventName:
+        type: string
+      marketId:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      profitLoss:
+        type: number
+    type: object
+  reports.EventPnLReportReqDto:
+    properties:
+      competitionId:
+        type: string
+      endTime:
+        type: number
+      eventId:
+        type: string
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      startTime:
+        type: number
+      userId:
+        type: string
+    type: object
+  reports.EventPnLReportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      eventId:
+        type: string
+      sportPnLReport:
+        items:
+          $ref: '#/definitions/reports.EventPnLReport'
+        type: array
+      status:
+        type: string
+    type: object
+  reports.GameReport:
+    properties:
+      bet_count:
+        type: integer
+      game_name:
+        type: string
+      lose_count:
+        type: integer
+      void_count:
+        type: integer
+      win_amount:
+        type: number
+      win_count:
+        type: integer
+    type: object
+  reports.GameReportReqDto:
+    properties:
+      end_time:
+        type: number
+      provider_id:
+        type: string
+      start_time:
+        type: number
+      status:
+        type: string
+      user_name:
+        type: string
+    type: object
+  reports.GameReportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      gameReport:
+        items:
+          $ref: '#/definitions/reports.GameReport'
+        type: array
+      status:
+        type: string
+      user_name:
+        type: string
+    type: object
+  reports.Market:
+    properties:
+      marketId:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      risk_report:
+        items:
+          $ref: '#/definitions/reports.Runner'
+        type: array
+    type: object
+  reports.MyAccStatement:
+    properties:
+      amount:
+        type: number
+      from_to:
+        type: string
+      my_share:
+        type: number
+      points:
+        type: number
+      settlement_time:
+        type: integer
+      status:
+        type: string
+      transaction_id:
+        type: string
+    type: object
+  reports.MyAccStatementReqDto:
+    properties:
+      end_time:
+        type: number
+      start_time:
+        type: number
+      status:
+        type: string
+      user_name:
+        type: string
+    type: object
+  reports.MyAccStatementRespDto:
+    properties:
+      errorDescription:
+        type: string
+      myAccStatement:
+        items:
+          $ref: '#/definitions/reports.MyAccStatement'
+        type: array
+      status:
+        type: string
+    type: object
+  reports.PnLReport:
+    properties:
+      market_type:
+        type: string
+      profit_loss:
+        type: number
+      sport_name:
+        type: string
+    type: object
+  reports.PnLReportReqDto:
+    properties:
+      end_time:
+        type: number
+      start_time:
+        type: number
+      user_name:
+        type: string
+    type: object
+  reports.PnLReportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      pnLReport:
+        items:
+          $ref: '#/definitions/reports.PnLReport'
+        type: array
+      status:
+        type: string
+      user_name:
+        type: string
+    type: object
+  reports.ProviderPnLReport:
+    properties:
+      betCount:
+        type: integer
+      profitLoss:
+        type: number
+      providerId:
+        type: string
+      sportId:
+        type: string
+      sportName:
+        type: string
+    type: object
+  reports.ProviderPnLReportReqDto:
+    properties:
+      endTime:
+        type: number
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      startTime:
+        type: number
+      userId:
+        type: string
+    type: object
+  reports.ProviderPnLReportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      providerId:
+        type: string
+      providerPnLReport:
+        items:
+          $ref: '#/definitions/reports.ProviderPnLReport'
+        type: array
+      status:
+        type: string
+    type: object
+  reports.RiskReportReqDto:
+    properties:
+      eventId:
+        type: string
+      providerId:
+        type: string
+      userId:
+        type: string
+    type: object
+  reports.RiskReportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      eventId:
+        type: string
+      eventName:
+        type: string
+      markets:
+        items:
+          $ref: '#/definitions/reports.Market'
+        type: array
+      status:
+        type: string
+    type: object
+  reports.Runner:
+    properties:
+      runnerId:
+        type: string
+      runnerName:
+        type: string
+      runnerRisk:
+        type: number
+    type: object
+  reports.SeemlessStatement:
+    properties:
+      balance:
+        type: number
+      creditAmount:
+        type: number
+      debitAmount:
+        type: number
+      referenceId:
+        type: string
+      remark:
+        type: string
+      transactionId:
+        type: string
+      transactionTime:
+        type: integer
+      transactionType:
+        type: string
+    type: object
+  reports.SeemlessUserStatementRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+      userBalance:
+        type: number
+      userId:
+        type: string
+      userName:
+        type: string
+      userStatement:
+        items:
+          $ref: '#/definitions/reports.SeemlessStatement'
+        type: array
+    type: object
+  reports.SportPnLReport:
+    properties:
+      betCount:
+        type: integer
+      competitionId:
+        type: string
+      competitionName:
+        type: string
+      profitLoss:
+        type: number
+      sportId:
+        type: string
+      sportName:
+        type: string
+    type: object
+  reports.SportPnLReportReqDto:
+    properties:
+      endTime:
+        type: number
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      startTime:
+        type: number
+      userId:
+        type: string
+    type: object
+  reports.SportPnLReportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      sportId:
+        type: string
+      sportPnLReport:
+        items:
+          $ref: '#/definitions/reports.SportPnLReport'
+        type: array
+      status:
+        type: string
+    type: object
+  reports.Statement:
+    properties:
+      balance:
+        type: number
+      creditAmount:
+        type: number
+      debitAmount:
+        type: number
+      referenceId:
+        type: string
+      remark:
+        type: string
+      transactionId:
+        type: string
+      transactionTime:
+        type: integer
+      transactionType:
+        type: string
+    type: object
+  reports.TransferUserStatementReqDto:
+    properties:
+      endTime:
+        type: integer
+      referenceId:
+        type: string
+      startTime:
+        type: integer
+      userId:
+        type: string
+    type: object
+  reports.TransferUserStatementRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+      userBalance:
+        type: number
+      userId:
+        type: string
+      userName:
+        type: string
+      userStatement:
+        items:
+          $ref: '#/definitions/reports.Statement'
+        type: array
+    type: object
+  reports.UserAuditReport:
+    properties:
+      ip:
+        type: string
+      operation:
+        type: string
+      payload: {}
+      time:
+        type: integer
+      user_name:
+        type: string
+    type: object
+  reports.UserAuditReportReqDto:
+    properties:
+      end_time:
+        type: number
+      start_time:
+        type: number
+      user_name:
+        type: string
+    type: object
+  reports.UserAuditReportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+      user_audit_report:
+        items:
+          $ref: '#/definitions/reports.UserAuditReport'
+        type: array
+    type: object
+  reports.UserBook:
+    properties:
+      risk_report:
+        items:
+          $ref: '#/definitions/reports.UserBookRunner'
+        type: array
+      userId:
+        type: string
+      userName:
+        type: string
+    type: object
+  reports.UserBookReportReqDto:
+    properties:
+      eventId:
+        type: string
+      marketId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  reports.UserBookReportRespDto:
+    properties:
+      errorDescription:
+        type: string
+      eventId:
+        type: string
+      eventName:
+        type: string
+      marketId:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      status:
+        type: string
+      userBooks:
+        items:
+          $ref: '#/definitions/reports.UserBook'
+        type: array
+    type: object
+  reports.UserBookRunner:
+    properties:
+      runnerId:
+        type: string
+      runnerName:
+        type: string
+      runnerRisk:
+        type: number
+    type: object
+  reports.UserStatement:
+    properties:
+      balance:
+        type: number
+      credit_amount:
+        type: number
+      debit_amount:
+        type: number
+      event_name:
+        type: string
+      market_type:
+        type: string
+      settlement_time:
+        type: integer
+      transaction_id:
+        type: string
+    type: object
+  reports.UserStatementReqDto:
+    properties:
+      end_time:
+        type: number
+      start_time:
+        type: number
+      status:
+        type: string
+      user_name:
+        type: string
+    type: object
+  reports.UserStatementRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+      userStatement:
+        items:
+          $ref: '#/definitions/reports.UserStatement'
+        type: array
+    type: object
+  request.CancelInstruction:
+    properties:
+      betId:
+        type: string
+      sizeReduction:
+        type: number
+    type: object
+  request.ListCancelOrdersReq:
+    properties:
+      customerRef:
+        type: string
+      instructions:
+        items:
+          $ref: '#/definitions/request.CancelInstruction'
+        type: array
+      marketId:
+        type: string
+    type: object
+  request.ListClearedOrdersReq:
+    properties:
+      betIds:
+        items:
+          type: string
+        type: array
+      betStatus:
+        type: string
+    type: object
+  request.ListCurrentOrdersReq:
+    properties:
+      betIds:
+        items:
+          type: string
+        type: array
+      customerOrderRefs:
+        items:
+          type: string
+        type: array
+      fromRecord:
+        type: integer
+      marketIds:
+        items:
+          type: string
+        type: array
+      recordCount:
+        type: integer
+    type: object
+  requestdto.AddMarket:
+    properties:
+      competitionId:
+        description: IPL / BBL
+        type: string
+      eventId:
+        description: Unique Event Id
+        type: string
+      marketId:
+        description: Unique Market Id
+        type: string
+      marketType:
+        description: MATCH_ODDS / BOOKMAKER / FANCY
+        type: string
+      operatorId:
+        type: string
+      providerId:
+        description: Dream / BetFair / SportRadar
+        type: string
+      sportId:
+        description: 1 / 2 / 3
+        type: string
+    type: object
+  requestdto.BetsReportReq:
+    properties:
+      operatorId:
+        type: string
+      page:
+        type: integer
+      pageSize:
+        type: integer
+    type: object
+  requestdto.BetsResultReqDto:
+    properties:
+      betIds:
+        items:
+          type: string
+        type: array
+      operatorId:
+        type: string
+    type: object
+  requestdto.BetsStatusReqDto:
+    properties:
+      betIds:
+        items:
+          type: string
+        type: array
+      operatorId:
+        type: string
+    type: object
+  requestdto.CancelBet:
+    properties:
+      betId:
+        type: string
+      cancelSize:
+        description: ZERO means, cancel everything
+        type: number
+    type: object
+  requestdto.CancelBetReqDto:
+    properties:
+      cancelBets:
+        description: BetIds     []string `json:"betIds"`
+        items:
+          $ref: '#/definitions/requestdto.CancelBet'
+        type: array
+      eventId:
+        type: string
+      marketId:
+        type: string
+      operatorId:
+        type: string
+      providerId:
+        description: DREAM/BET_FAIR/SPORTS_RADAR
+        type: string
+      sportId:
+        description: CRICKET/SOCCER/TENNIS
+        type: string
+      token:
+        type: string
+    type: object
+  requestdto.DatabaseWriteReqDto:
+    properties:
+      message:
+        description: any message
+        type: string
+      operatorId:
+        type: string
+    type: object
+  requestdto.DefaultReqDto:
+    properties:
+      operatorId:
+        type: string
+    type: object
+  requestdto.GetAllBetsReqDto:
+    properties:
+      endTime:
+        type: integer
+      referenceId:
+        type: string
+      startTime:
+        type: integer
+      token:
+        type: string
+    type: object
+  requestdto.GetCacheReq:
+    properties:
+      cacheType:
+        type: string
+      key:
+        type: string
+    type: object
+  requestdto.GetLicenseStatusReqDto:
+    properties:
+      operatorId:
+        type: string
+    type: object
+  requestdto.GetMatchedBetsReqDto:
+    properties:
+      betIds:
+        items:
+          type: string
+        type: array
+    type: object
+  requestdto.Market:
+    properties:
+      eventId:
+        type: string
+      marketId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+    type: object
+  requestdto.MarketsResultReqDto:
+    properties:
+      markets:
+        items:
+          $ref: '#/definitions/requestdto.Market'
+        type: array
+      operatorId:
+        type: string
+    type: object
+  requestdto.OpenBetsReqDto:
+    properties:
+      eventId:
+        type: string
+      operatorId:
+        description: Optional for feed-service
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      token:
+        type: string
+    type: object
+  requestdto.PlaceBetReqDto:
+    properties:
+      betType:
+        description: BACK/LAY
+        type: string
+      competitionId:
+        type: string
+      eventId:
+        type: string
+      isUnmatched:
+        description: For BetFair. Default is false, means FILL_OR_KILL.
+        type: boolean
+      marketId:
+        type: string
+      marketName:
+        description: for soccer, match_odds or goal_markets, can be avoided
+        type: string
+      marketType:
+        description: MATCH_ODDS/BOOK_MAKER/GOAL_MARKETS/FANCY_MARKET/
+        type: string
+      oddValue:
+        type: number
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      providerId:
+        description: DREAM/BET_FAIR/SPORTS_RADAR
+        type: string
+      runnerId:
+        description: ?? what is for fancy
+        type: string
+      runnerName:
+        description: ?? what is for fancy
+        type: string
+      sessionOutcome:
+        description: 'fancy scrore ex: 45 NO, 46 YES'
+        type: number
+      sportId:
+        description: CRICKET/SOCCER/TENNIS
+        type: string
+      stakeAmount:
+        type: number
+      token:
+        type: string
+      userAgent:
+        description: Mobile or Internet
+        type: string
+    type: object
+  requestdto.ProvidersReqDto:
+    properties:
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+    type: object
+  requestdto.SportRadarCancelBetReqDto:
+    properties:
+      betId:
+        type: string
+    type: object
+  requestdto.UserBetStatusReqDto:
+    properties:
+      eventId:
+        type: string
+      operatorId:
+        type: string
+      providerId:
+        type: string
+      sportId:
+        type: string
+      token:
+        type: string
+    type: object
+  response.BFCancelOrdersResp:
+    properties:
+      cancelOrdersResp:
+        $ref: '#/definitions/response.CancelOrdersResp'
+      message:
+        description: Error message
+        type: string
+      status:
+        description: RS_OK or RS_ERROR
+        type: string
+    type: object
+  response.BFClearedOrdersResp:
+    properties:
+      clearedOrderResp:
+        $ref: '#/definitions/response.ClearedOrdersResp'
+      message:
+        description: Error message
+        type: string
+      status:
+        description: RS_OK or RS_ERROR
+        type: string
+    type: object
+  response.BFCurrentOrdersResp:
+    properties:
+      currentOrdersResp:
+        $ref: '#/definitions/response.CurrentOrdersResp'
+      message:
+        description: Error message
+        type: string
+      status:
+        description: RS_OK or RS_ERROR
+        type: string
+    type: object
+  response.CancelInstruction:
+    properties:
+      betId:
+        type: string
+      sizeReduction:
+        type: number
+    type: object
+  response.CancelInstructionReport:
+    properties:
+      cancelledDate:
+        type: string
+      errorCode:
+        type: string
+      instruction:
+        $ref: '#/definitions/response.CancelInstruction'
+      sizeCancelled:
+        type: number
+      status:
+        type: string
+    type: object
+  response.CancelOrdersResp:
+    properties:
+      customerRef:
+        type: string
+      errorCode:
+        type: string
+      instructionReports:
+        items:
+          $ref: '#/definitions/response.CancelInstructionReport'
+        type: array
+      marketId:
+        type: string
+      status:
+        type: string
+    type: object
+  response.ClearedOrder:
+    properties:
+      betCount:
+        type: integer
+      betId:
+        type: string
+      betOutcome:
+        type: string
+      commission:
+        type: number
+      customerOrderRef:
+        type: string
+      customerStrategyRef:
+        type: string
+      eventId:
+        type: string
+      eventTypeId:
+        type: string
+      handicap:
+        type: number
+      itemDescription: {}
+      lastMatchedDate:
+        type: string
+      marketId:
+        type: string
+      orderType:
+        type: string
+      persistenceType:
+        type: string
+      placedDate:
+        type: string
+      priceMatched:
+        type: number
+      priceReduced:
+        type: boolean
+      priceRequested:
+        type: number
+      profit:
+        type: number
+      selectionId:
+        type: integer
+      settledDate:
+        type: string
+      side:
+        type: string
+      sizeCancelled:
+        type: number
+      sizeSettled:
+        type: number
+    type: object
+  response.ClearedOrdersResp:
+    properties:
+      clearedOrders:
+        items:
+          $ref: '#/definitions/response.ClearedOrder'
+        type: array
+      moreAvailable:
+        type: boolean
+    type: object
+  response.CurrentOrder:
+    properties:
+      averagePriceMatched:
+        type: number
+      betId:
+        type: string
+      bspLiability:
+        type: number
+      customerOrderRef:
+        type: string
+      customerStrategyRef:
+        type: string
+      handicap:
+        type: number
+      marketId:
+        type: string
+      matchedDate:
+        type: string
+      orderType:
+        type: string
+      persistenceType:
+        type: string
+      placedDate:
+        type: string
+      priceSize:
+        properties:
+          price:
+            type: number
+          size:
+            type: number
+        type: object
+      regulatorAuthCode:
+        type: string
+      regulatorCode:
+        type: string
+      selectionId:
+        type: integer
+      side:
+        type: string
+      sizeCancelled:
+        type: number
+      sizeLapsed:
+        type: number
+      sizeMatched:
+        type: number
+      sizeRemaining:
+        type: number
+      sizeVoided:
+        type: number
+      status:
+        type: string
+    type: object
+  response.CurrentOrdersResp:
+    properties:
+      currentOrders:
+        items:
+          $ref: '#/definitions/response.CurrentOrder'
+        type: array
+      moreAvailable:
+        type: boolean
+    type: object
+  responsedto.AllBetDto:
+    properties:
+      betId:
+        type: string
+      betResult:
+        type: string
+      betReturns:
+        type: number
+      betStatus:
+        type: string
+      betType:
+        type: string
+      currency:
+        type: string
+      eventId:
+        type: string
+      eventName:
+        type: string
+      isUnmatched:
+        type: boolean
+      marketId:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      oddValue:
+        type: number
+      openEventDate:
+        type: integer
+      requestTime:
+        type: integer
+      runnerId:
+        type: string
+      runnerName:
+        type: string
+      sessionOutcome:
+        type: number
+      sportId:
+        type: string
+      sportName:
+        type: string
+      stakeAmount:
+        type: number
+    type: object
+  responsedto.BetReportResp:
+    properties:
+      betsData:
+        items:
+          $ref: '#/definitions/sports.BetDto'
+        type: array
+      errorDescription:
+        type: string
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      status:
+        type: string
+      totalRecords:
+        type: integer
+    type: object
+  responsedto.BetResult:
+    properties:
+      creditAmount:
+        description: SETTLED Bets
+        type: number
+      eventId:
+        description: EventId map to gameId in JSON to be inline with GAP
+        type: string
+      marketId:
+        description: MarketId map to roundId in JSON to be inline iwth GAP
+        type: string
+      operatorId:
+        type: string
+      reqId:
+        type: string
+      rollbackAmount:
+        description: +ve value to deposit to user, -ve value to deduct from user
+        type: number
+      rollbackReason:
+        description: RollbackType   string  `json:"rollbackType"`   // rollback /
+          void / cancelled / expired / lapsed / deleted
+        type: string
+      status:
+        type: string
+      token:
+        type: string
+      transactionId:
+        type: string
+      userId:
+        type: string
+    type: object
+  responsedto.BetStatus:
+    properties:
+      betId:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.BetsResultRespDto:
+    properties:
+      betsResult:
+        items:
+          $ref: '#/definitions/responsedto.BetResult'
+        type: array
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.BetsStatusRespDto:
+    properties:
+      betsStatus:
+        items:
+          $ref: '#/definitions/responsedto.BetStatus'
+        type: array
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.CancelBetResp:
+    properties:
+      betId:
+        type: string
+      errorCode:
+        type: string
+      sizeCancelled:
+        type: number
+      sizeMatched:
+        type: number
+      sizeRemaining:
+        type: number
+      status:
+        type: string
+    type: object
+  responsedto.CancelBetRespDto:
+    properties:
+      balance:
+        type: number
+      cancelBetsResp:
+        items:
+          $ref: '#/definitions/responsedto.CancelBetResp'
+        type: array
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.DefaultRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.GetAllBetsRespDto:
+    properties:
+      allBets:
+        items:
+          $ref: '#/definitions/responsedto.AllBetDto'
+        type: array
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.GetCacheResp:
+    properties:
+      errorDescription:
+        type: string
+      respJson:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.GetLicenseStatusRespDto:
+    properties:
+      errorDescription:
+        type: string
+      licenseStatus:
+        type: boolean
+      status:
+        type: string
+    type: object
+  responsedto.GetMatchedBetsRespDto:
+    properties:
+      betIds:
+        items:
+          $ref: '#/definitions/responsedto.IsMatchedStatus'
+        type: array
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.IsMatchedStatus:
+    properties:
+      betId:
+        type: string
+      betStatus:
+        type: string
+      isMatched:
+        type: boolean
+      oddValue:
+        type: number
+      sizeMatched:
+        type: number
+      sizeRemaining:
+        type: number
+    type: object
+  responsedto.MarketResult:
+    properties:
+      eventId:
+        description: Unique event id
+        type: string
+      marketId:
+        description: Unique Id of the market
+        type: string
+      providerId:
+        description: Dream / BetFair / SportRadar
+        type: string
+      runnerId:
+        type: string
+      runnerName:
+        type: string
+      sessionOutcome:
+        description: 'fancy scrore ex: 45 NO, 46 YES'
+        type: number
+      sportId:
+        description: 1 / 2 / 4
+        type: string
+      status:
+        description: OPEN / MAPPED / INPROGRESS / SETTLED / VOIDED / CANCELLED / SUSPENDED
+        type: string
+    type: object
+  responsedto.MarketsResultRespDto:
+    properties:
+      errorDescription:
+        type: string
+      marketsResult:
+        items:
+          $ref: '#/definitions/responsedto.MarketResult'
+        type: array
+      status:
+        type: string
+    type: object
+  responsedto.OddsData:
+    properties:
+      oddsAt:
+        description: Date in readable string format in UTC (from UNIX timestamp)
+        type: string
+      oddsKey:
+        description: BEFORE / CURRENT / AFTER
+        type: string
+      oddsValue:
+        type: number
+    type: object
+  responsedto.OpenBetDto:
+    properties:
+      betId:
+        type: string
+      betType:
+        type: string
+      eventId:
+        type: string
+      isUnmatched:
+        type: boolean
+      marketId:
+        type: string
+      marketName:
+        type: string
+      marketType:
+        type: string
+      oddValue:
+        type: number
+      oddsHistory:
+        items:
+          $ref: '#/definitions/responsedto.OddsData'
+        type: array
+      runnerId:
+        type: string
+      runnerName:
+        type: string
+      sessionOutcome:
+        type: number
+      sportId:
+        type: string
+      stakeAmount:
+        type: number
+    type: object
+  responsedto.OpenBetsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      openBets:
+        items:
+          $ref: '#/definitions/responsedto.OpenBetDto'
+        type: array
+      status:
+        type: string
+    type: object
+  responsedto.PlaceBetRespDto:
+    properties:
+      betId:
+        type: string
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.SportRadarCancelBetRespDto:
+    properties:
+      errorDescription:
+        type: string
+      status:
+        type: string
+    type: object
+  responsedto.UserBetStatusRespDto:
+    properties:
+      balance:
+        type: number
+      betErrorMsg:
+        description: bet placement failure message
+        type: string
+      betId:
+        description: Last Bet Id
+        type: string
+      betStatus:
+        description: PENDING / COMPLETED / CANCELLED / EXPIRED
+        type: string
+      errorDescription:
+        description: ERROR Description if RS_ERROR
+        type: string
+      openBets:
+        items:
+          $ref: '#/definitions/responsedto.OpenBetDto'
+        type: array
+      requestTime:
+        description: Last BET request time
+        type: integer
+      status:
+        description: RS_OK / RS_ERROR
+        type: string
+    type: object
+  responsedto.ValidateOddsRespDto:
+    properties:
+      errorDescription:
+        type: string
+      eventDate:
+        type: integer
+      eventStatus:
+        type: string
+      isValid:
+        type: boolean
+      matchedOddValue:
+        type: number
+      oddsList:
+        items:
+          type: number
+        type: array
+      status:
+        type: string
+    type: object
+  sports.BetDetailsDto:
+    properties:
+      betType:
+        description: BACK/LAY
+        type: string
+      competitionName:
+        type: string
+      eventName:
+        type: string
+      isUnmatched:
+        description: For BetFair. Default is false
+        type: boolean
+      marketName:
+        description: for soccer, match_odds or goal_markets, can be avoided
+        type: string
+      marketType:
+        description: MATCH_ODDS/BOOK_MAKER/GOAL_MARKETS/FANCY_MARKET/
+        type: string
+      oddValue:
+        type: number
+      runnerId:
+        description: ?? what is for fancy
+        type: string
+      runnerName:
+        description: ?? what is for fancy
+        type: string
+      sessionOutcome:
+        description: 'fancy scrore ex: 45 NO, 46 YES'
+        type: number
+      sportName:
+        type: string
+      stakeAmount:
+        type: number
+    type: object
+  sports.BetDto:
+    properties:
+      betDetails:
+        $ref: '#/definitions/sports.BetDetailsDto'
+      betId:
+        type: string
+      betReq:
+        $ref: '#/definitions/sports.BetReqDto'
+      commLevel:
+        type: string
+      commission:
+        type: number
+      competitionId:
+        type: string
+      createdAt:
+        description: DateTime in Unix seconds
+        type: integer
+      eventId:
+        type: string
+      eventKey:
+        type: string
+      id:
+        type: string
+      marketId:
+        type: string
+      netAmount:
+        type: number
+      oddsHistory:
+        items:
+          $ref: '#/definitions/sports.OddsData'
+        type: array
+      operatorId:
+        type: string
+      partnerId:
+        type: string
+      providerId:
+        type: string
+      resultReqs:
+        items:
+          $ref: '#/definitions/sports.ResultReqDto'
+        type: array
+      rollbackReqs:
+        items:
+          $ref: '#/definitions/sports.RollbackReqDto'
+        type: array
+      sportId:
+        type: string
+      status:
+        description: unmatched / open(rollback) / settled / void / cancel / deleted
+        type: string
+      token:
+        type: string
+      updatedAt:
+        type: integer
+      userId:
+        type: string
+      userIp:
+        type: string
+      userName:
+        type: string
+    type: object
+  sports.BetReqDto:
+    properties:
+      betId:
+        description: only for BetFair
+        type: string
+      debitAmount:
+        type: number
+      oddsMatched:
+        type: number
+      operatorAmount:
+        type: number
+      operatorHold:
+        type: number
+      platformAmount:
+        type: number
+      platformHold:
+        type: number
+      rate:
+        type: integer
+      reqId:
+        type: string
+      reqTime:
+        type: integer
+      sizeCancelled:
+        type: number
+      sizeLapsed:
+        type: number
+      sizeMatched:
+        type: number
+      sizePlaced:
+        type: number
+      sizeRemaining:
+        type: number
+      sizeVoided:
+        type: number
+    type: object
+  sports.OddsData:
+    properties:
+      oddsAt:
+        description: Date in readable string format in UTC (from UNIX timestamp)
+        type: string
+      oddsKey:
+        description: BEFORE / CURRENT / AFTER
+        type: string
+      oddsValue:
+        type: number
+    type: object
+  sports.ResultReqDto:
+    properties:
+      creditAmount:
+        type: number
+      operatorAmount:
+        type: number
+      platformAmount:
+        type: number
+      reqId:
+        type: string
+      reqTime:
+        type: integer
+      runnerName:
+        type: string
+      sessionOutcome:
+        type: number
+    type: object
+  sports.RollbackReqDto:
+    properties:
+      operatorAmount:
+        type: number
+      platformAmount:
+        type: number
+      reqId:
+        type: string
+      reqTime:
+        type: integer
+      rollbackAmount:
+        type: number
+      rollbackReason:
+        type: string
+    type: object
+info:
+  contact:
+    email: amit.m@outlook.com
+    name: Amit
+  description: This is an API Documentation for Sports Aggregation Platform (SAP)
+  title: SAP
+  version: "1.0"
+paths:
+  /cache/get-cache:
+    post:
+      consumes:
+      - application/json
+      description: Endpoint to read cache data
+      parameters:
+      - description: GetCacheReq model is used
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.GetCacheReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.GetCacheResp'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.GetCacheResp'
+      summary: Get Cache Data
+      tags:
+      - Cache-Service
+  /core/get-transfer-user-statement:
+    post:
+      consumes:
+      - application/json
+      description: Get Transfer User Statement API
+      parameters:
+      - description: GetAllBetsReqDto model is used
+        in: body
+        name: GetUserStatement
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.GetAllBetsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.TransferUserStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.TransferUserStatementRespDto'
+      summary: Get Transfer User Statement API
+      tags:
+      - Core
+  /core/getevents:
+    post:
+      consumes:
+      - application/json
+      description: Get Events
+      parameters:
+      - description: GetEventsReqDto model is used
+        in: body
+        name: GetEvents
+        required: true
+        schema:
+          $ref: '#/definitions/Sp_dto_core.GetEventsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Sp_dto_core.GetEventsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/Sp_dto_core.GetEventsReqDto'
+      summary: Get Events
+      tags:
+      - Core
+  /core/getliveevents:
+    post:
+      consumes:
+      - application/json
+      description: Get Live Events
+      parameters:
+      - description: GetLiveEventsReqDto model is used
+        in: body
+        name: GetLiveEvents
+        required: true
+        schema:
+          $ref: '#/definitions/dto.GetLiveEventsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.GetLiveEventsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.GetLiveEventsReqDto'
+      summary: Get Live Events
+      tags:
+      - Core
+  /core/getmarkets:
+    post:
+      consumes:
+      - application/json
+      description: Get Markets
+      parameters:
+      - description: GetMarketsReqDto model is used
+        in: body
+        name: GetMarkets
+        required: true
+        schema:
+          $ref: '#/definitions/Sp_dto_core.GetMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Sp_dto_core.GetMarketsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/Sp_dto_core.GetMarketsReqDto'
+      summary: Get Markets
+      tags:
+      - Core
+  /core/getsports:
+    post:
+      consumes:
+      - application/json
+      description: Get Sports
+      parameters:
+      - description: GetSportsReqDto model is used
+        in: body
+        name: GetSports
+        required: true
+        schema:
+          $ref: '#/definitions/commondto.GetSportsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commondto.GetSportsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/commondto.GetSportsRespDto'
+      summary: Get Sports
+      tags:
+      - Core
+  /core/sportsbet:
+    post:
+      consumes:
+      - application/json
+      description: Bet Placement Async Endpoint
+      parameters:
+      - description: PlaceBetReqDto model is used
+        in: body
+        name: SportsBet
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.PlaceBetReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.PlaceBetRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.PlaceBetRespDto'
+      summary: Place Bet
+      tags:
+      - Core
+  /core/userbet-status:
+    post:
+      consumes:
+      - application/json
+      description: User's last bet status - to support Async Bet Placement
+      parameters:
+      - description: UserBetStatusReqDto model is used
+        in: body
+        name: UserBetStatus
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.UserBetStatusReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.UserBetStatusRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.UserBetStatusRespDto'
+      summary: User Bet Status
+      tags:
+      - Core
+  /feed/Open-bets:
+    post:
+      consumes:
+      - application/json
+      description: To get list of Open Bets in an event
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: OpenBetsReqDto model is used
+        in: body
+        name: OpenBets
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.OpenBetsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.OpenBetsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.OpenBetsRespDto'
+      summary: Open Bets
+      tags:
+      - Feed-Service
+  /feed/add-market:
+    post:
+      consumes:
+      - application/json
+      description: To notify SAP to add Market in the system if not present. This
+        helps to maintain the market status
+      parameters:
+      - description: AddMarket model is used
+        in: body
+        name: AddMarket
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.AddMarket'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: Add Market API
+      tags:
+      - Feed-Service
+  /feed/bets-result:
+    post:
+      consumes:
+      - application/json
+      description: Bets Result for multiple bets
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: BetsResultReqDto model is used
+        in: body
+        name: BetsResult
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.BetsResultReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.BetsResultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.BetsResultRespDto'
+      summary: Bets Result
+      tags:
+      - Feed-Service
+  /feed/bets-status:
+    post:
+      consumes:
+      - application/json
+      description: Bets Status for multiple bets
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: BetsStatusReqDto model is used
+        in: body
+        name: BetsStatus
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.BetsStatusReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.BetsStatusRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.BetsStatusRespDto'
+      summary: Bets Status
+      tags:
+      - Feed-Service
+  /feed/cancel-bets:
+    post:
+      consumes:
+      - application/json
+      description: Bets Cancel for multiple bets
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: CancelBetReqDto model is used
+        in: body
+        name: PlaceBet
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.CancelBetReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.CancelBetRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.CancelBetRespDto'
+      summary: Cancel Bets
+      tags:
+      - Feed-Service
+  /feed/get-is-matched-status:
+    post:
+      consumes:
+      - application/json
+      description: GetIsMatchedStatus takes a array of BetIds and returns weather
+        the bet is matched or not
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: GetMatchedBetsReqDto model is used
+        in: body
+        name: GetIsMatchedStatus
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.GetMatchedBetsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.GetMatchedBetsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.GetMatchedBetsRespDto'
+      summary: Get isMatched Bet status
+      tags:
+      - Feed-Service
+  /feed/license-status:
+    post:
+      consumes:
+      - application/json
+      description: GetLicenseStatus checks operators current license status
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: GetLicenseStatusReqDto model is used
+        in: body
+        name: GetLicenseStatus
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.GetLicenseStatusReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.GetLicenseStatusRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.GetLicenseStatusRespDto'
+      summary: Get License status
+      tags:
+      - Feed-Service
+  /feed/markets-result:
+    post:
+      consumes:
+      - application/json
+      description: Markets Result for multiple markets
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: MarketsResultReqDto model is used
+        in: body
+        name: MarketsResult
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.MarketsResultReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.MarketsResultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.MarketsResultRespDto'
+      summary: Markets Result
+      tags:
+      - Feed-Service
+  /feed/place-bet:
+    post:
+      consumes:
+      - application/json
+      description: Bet Placement Async Endpoint
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: PlaceBetReqDto model is used
+        in: body
+        name: PlaceBet
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.PlaceBetReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.PlaceBetRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.PlaceBetRespDto'
+      summary: Place Bet
+      tags:
+      - Feed-Service
+  /feed/seemless-user-statement:
+    post:
+      consumes:
+      - application/json
+      description: Get Seemless User Statement
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: UserStatementReqDto model is used
+        in: body
+        name: SeemlessUserStatement
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.UserStatementReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.SeemlessUserStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.SeemlessUserStatementRespDto'
+      summary: Get Seemless User Statement
+      tags:
+      - Feed
+  /feed/sportradar-cancel-bet:
+    post:
+      consumes:
+      - application/json
+      description: Bets Cancel for single sportradar bets
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: SportRadarCancelBetReqDto model is used
+        in: body
+        name: PlaceBet
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.SportRadarCancelBetReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.SportRadarCancelBetRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.SportRadarCancelBetRespDto'
+      summary: Cancel SportRadar Bet
+      tags:
+      - Feed-Service
+  /feed/test-signature:
+    post:
+      consumes:
+      - application/json
+      description: To test signature functionality
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: ProvidersReqDto model is used
+        in: body
+        name: TestSignature
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.ProvidersReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: Test Signature
+      tags:
+      - Feed-Service
+  /feed/transfer-user-statement:
+    post:
+      consumes:
+      - application/json
+      description: Get Transfer User Statement
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: UserStatementReqDto model is used
+        in: body
+        name: TransferUserStatement
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.UserStatementReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.TransferUserStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.TransferUserStatementRespDto'
+      summary: Get Transfer User Statement
+      tags:
+      - Feed
+  /feed/user-login:
+    post:
+      consumes:
+      - application/json
+      description: User Login to get Session Token
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: AuthReqDto model is used
+        in: body
+        name: Login
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AuthReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.AuthRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.AuthRespDto'
+      summary: User Login
+      tags:
+      - Feed-Service
+  /feed/user-statement:
+    post:
+      consumes:
+      - application/json
+      description: List Transactions of a user. Pagination is present. A maximum of
+        50 Transactions in a single request.
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: UserStatementReqDto model is used
+        in: body
+        name: UserStatement
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserStatementReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.UserStatementRespDto'
+      summary: Get User Statement
+      tags:
+      - Feed
+  /feed/validate-odds:
+    post:
+      consumes:
+      - application/json
+      description: Validate Odds endpoint
+      parameters:
+      - description: Hash Signature
+        in: header
+        name: Signature
+        required: true
+        type: string
+      - description: PlaceBetReqDto model is used
+        in: body
+        name: ValidateOdds
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.PlaceBetReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.ValidateOddsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.ValidateOddsRespDto'
+      summary: Validate Odds
+      tags:
+      - Feed-Service
+  /loadtest/average-load:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back after 50ms sleep.
+      parameters:
+      - description: DefaultReqDto model is used
+        in: body
+        name: AverageLoad
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.DefaultReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: AverageLoad is a function to test system with 50ms average response
+        time
+      tags:
+      - loadtest
+  /loadtest/cache-read:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back after cache read.
+      parameters:
+      - description: DefaultReqDto model is used
+        in: body
+        name: CacheRead
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.DefaultReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: CacheRead is a function to test system with cache read
+      tags:
+      - loadtest
+  /loadtest/cancel-orders:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back after 50ms sleep.
+      parameters:
+      - description: ListCancelOrdersReq model is used
+        in: body
+        name: CancelOrders
+        required: true
+        schema:
+          $ref: '#/definitions/request.ListCancelOrdersReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.BFCancelOrdersResp'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/response.BFCancelOrdersResp'
+      summary: CancelOrders is a function to test system with 50ms average response
+        time
+      tags:
+      - loadtest
+  /loadtest/cleared-orders:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back after 50ms sleep.
+      parameters:
+      - description: ListClearedOrdersReq model is used
+        in: body
+        name: ClearedOrders
+        required: true
+        schema:
+          $ref: '#/definitions/request.ListClearedOrdersReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.BFClearedOrdersResp'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/response.BFClearedOrdersResp'
+      summary: ClearedOrders is a function to test system with 50ms average response
+        time
+      tags:
+      - loadtest
+  /loadtest/current-orders:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back after 50ms sleep.
+      parameters:
+      - description: ListCurrentOrdersReq model is used
+        in: body
+        name: CurrentOrders
+        required: true
+        schema:
+          $ref: '#/definitions/request.ListCurrentOrdersReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.BFCurrentOrdersResp'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/response.BFCurrentOrdersResp'
+      summary: CurrentOrders is a function to test system with 50ms average response
+        time
+      tags:
+      - loadtest
+  /loadtest/database-read:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back after database read.
+      parameters:
+      - description: DefaultReqDto model is used
+        in: body
+        name: DatabaseRead
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.DefaultReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: DatabaseRead is a function to test system with database read
+      tags:
+      - loadtest
+  /loadtest/database-write:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back after database write.
+      parameters:
+      - description: DatabaseWriteReqDto model is used
+        in: body
+        name: DatabaseWrite
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.DatabaseWriteReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: DatabaseWrite is a function to test system with database write
+      tags:
+      - loadtest
+  /loadtest/end-to-end:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back getting response from L1->L2.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: EndToEnd is a function to test system with L3-L2-L1 latency
+      tags:
+      - loadtest
+  /loadtest/get-bfmetrics:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back after 50ms sleep.
+      parameters:
+      - description: DefaultReqDto model is used
+        in: body
+        name: GetBFMetrics
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.DefaultReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: GetBFMetrics is a function to test system with 50ms average response
+        time
+      tags:
+      - loadtest
+  /loadtest/layer-one-betFair:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back getting response from L1.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: LayerOneBetFair is a function to test system with L3-L1 latency
+      tags:
+      - loadtest
+  /loadtest/layer-one-dream:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back getting response from L1.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: LayerOneDream is a function to test system with L3-L1 latency
+      tags:
+      - loadtest
+  /loadtest/layer-one-sportradar:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back getting response from L1.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: LayerOneSportRadar is a function to test system with L3-L1 latency
+      tags:
+      - loadtest
+  /loadtest/layer-two:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back getting response from L2.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: LayerTwo is a function to test system with L3-L2 latency
+      tags:
+      - loadtest
+  /loadtest/login:
+    post:
+      consumes:
+      - application/json
+      description: Will respond back after 50ms sleep.
+      parameters:
+      - description: DefaultReqDto model is used
+        in: body
+        name: Login
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.DefaultReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.DefaultRespDto'
+      summary: Login is a function to test system with 50ms average response time
+      tags:
+      - loadtest
+  /opadmin/get-open-bets:
+    post:
+      consumes:
+      - application/json
+      description: Get Open Bets For Operators
+      parameters:
+      - description: OpenBetsReqDto model is used
+        in: body
+        name: GetOpenBetsForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.OpenBetsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.OpenBetsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.OpenBetsRespDto'
+      summary: Get Open Bets For Operators
+      tags:
+      - Portal-PlatformAdmin
+  /portal/close-events:
+    post:
+      consumes:
+      - application/json
+      description: Close Events by EventIds
+      parameters:
+      - description: CloseEventsReqDto model is used
+        in: body
+        name: CloseEvents
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CloseEventsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Close Events by EventIds
+      tags:
+      - Portal-PlatformAdmin
+  /portal/get-bet:
+    post:
+      consumes:
+      - application/json
+      description: Get Bet Details.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GetBetReqDto model is used
+        in: body
+        name: GetBet
+        required: true
+        schema:
+          $ref: '#/definitions/dto.GetBetReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/operatordto.GetBetRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/operatordto.GetBetRespDto'
+      summary: Get Bet
+      tags:
+      - Portal-OperatorAdmin
+  /portal/get-operators:
+    post:
+      consumes:
+      - application/json
+      description: Get All Operators
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.GetOperatorsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.GetOperatorsRespDto'
+      summary: Portal Get All Operators
+      tags:
+      - Portal-PlatformAdmin
+  /portal/list-events:
+    post:
+      consumes:
+      - application/json
+      description: List All Events by Sport by provider of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GetEventsReqDto model is used
+        in: body
+        name: ListSports
+        required: true
+        schema:
+          $ref: '#/definitions/Sp_dto_portal.GetEventsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetEventsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetEventsRespDto'
+      summary: List All Events
+      tags:
+      - Portal-OperatorAdmin
+  /portal/list-sports:
+    post:
+      consumes:
+      - application/json
+      description: List All Sports by provider of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GetSportsReqDto model is used
+        in: body
+        name: ListSports
+        required: true
+        schema:
+          $ref: '#/definitions/commondto.GetSportsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commondto.GetSportsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/commondto.GetSportsRespDto'
+      summary: List All Sports
+      tags:
+      - Portal-OperatorAdmin
+  /portal/list-users:
+    post:
+      consumes:
+      - application/json
+      description: List All Users of an operator. Pagination is present. A maximum
+        of 50 Users in a single request.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GetUsersReqDto model is used
+        in: body
+        name: ListUsers
+        required: true
+        schema:
+          $ref: '#/definitions/dto.GetUsersReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ListUsersRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.ListUsersRespDto'
+      summary: List All Users
+      tags:
+      - Portal-OperatorAdmin
+  /portal/login:
+    post:
+      consumes:
+      - application/json
+      description: Login into an administration portal
+      parameters:
+      - description: PortalLoginReqDto model is used
+        in: body
+        name: Login
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PortalLoginReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.PortalLoginRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.PortalLoginRespDto'
+      summary: Portal Login
+      tags:
+      - Portal-OperatorAdmin
+      - Portal-PlatformAdmin
+  /portal/opadmin/block-compititions:
+    post:
+      consumes:
+      - application/json
+      description: Block Competitions of an SAP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BlockedCompReqDto model is used
+        in: body
+        name: BlockCompetitionForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BlockedCompReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BlockedCompResqDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.BlockedCompResqDto'
+      summary: Block Competitions
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/block-event:
+    post:
+      consumes:
+      - application/json
+      description: Block Events of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BlockedEventReqDto model is used
+        in: body
+        name: BlockEventForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BlockedEventReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BlockedEventReqDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.BlockedEventReqDto'
+      summary: Block Events
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/block-market:
+    post:
+      consumes:
+      - application/json
+      description: Blocking a Market by Operator Admin
+      parameters:
+      - description: UpdateMarketsReqDto model is used
+        in: body
+        name: BlockMarketForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Blocking a Market by Operator Admin
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/block-sport:
+    post:
+      consumes:
+      - application/json
+      description: Block Sports For OP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BlockedSportReqDto model is used
+        in: body
+        name: BlockSportsForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BlockedSportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BlockedSportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.BlockedSportRespDto'
+      summary: Block Sports For OP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/compititions:
+    post:
+      consumes:
+      - application/json
+      description: List All Competitions of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: CompReqDto model is used
+        in: body
+        name: GetCompetitionsListForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CompReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CompRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CompRespDto'
+      summary: Get Competitions
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/events:
+    post:
+      consumes:
+      - application/json
+      description: List All Competitions of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GetEventsReqDto model is used
+        in: body
+        name: GetEventsListForOP
+        required: true
+        schema:
+          $ref: '#/definitions/Sp_dto_portal.GetEventsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetEventsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetEventsRespDto'
+      summary: Get Competitions
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/get-bets:
+    post:
+      consumes:
+      - application/json
+      description: List All Bets of OPAdmin. Pagination is present. A maximum of 50
+        Users in a single request.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BetsHistoryReqDto model is used
+        in: body
+        name: GetBetsForOP
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.BetsHistoryReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+      summary: Get Bets for OP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/get-markets:
+    post:
+      consumes:
+      - application/json
+      description: Get all Markets for an event by Operator Admin
+      parameters:
+      - description: GetMarketsReqDto model is used
+        in: body
+        name: GetMarketsForOP
+        required: true
+        schema:
+          $ref: '#/definitions/Sp_dto_portal.GetMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.GetMarketStatusRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.GetMarketStatusRespDto'
+      summary: GetMarkets by Operator Admin
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/recent-compititions:
+    post:
+      consumes:
+      - application/json
+      description: List All Recent Competitions of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: CompReqDto model is used
+        in: body
+        name: GetCompetitionsListForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CompReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CompRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CompRespDto'
+      summary: Get Recent Competitions
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/sports:
+    post:
+      consumes:
+      - application/json
+      description: List All Sports of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: SportsReqDto model is used
+        in: body
+        name: GetSportsListForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SportsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.SportsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.SportsRespDto'
+      summary: Get Sports
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/unblock-compititions:
+    post:
+      consumes:
+      - application/json
+      description: Unblock Competitions of an OP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: UnblockedCompResqDto model is used
+        in: body
+        name: UnblockCompetitionForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UnblockedCompResqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UnblockedCompReqDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.UnblockedCompReqDto'
+      summary: Unblock Competitions
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/unblock-event:
+    post:
+      consumes:
+      - application/json
+      description: Block Events of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GetEventsReqDto model is used
+        in: body
+        name: BlockEventForOP
+        required: true
+        schema:
+          $ref: '#/definitions/Sp_dto_portal.GetEventsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetEventsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetEventsRespDto'
+      summary: Block Events
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/unblock-market:
+    post:
+      consumes:
+      - application/json
+      description: Unblocking a Market by Operator Admin
+      parameters:
+      - description: UpdateMarketsReqDto model is used
+        in: body
+        name: UnblockMarketForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Unblocking a Market by Operator Admin
+      tags:
+      - Portal-OperatorAdmin
+  /portal/opadmin/unblock-sport:
+    post:
+      consumes:
+      - application/json
+      description: Unblock Sport For OP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: UnblockedSportReqDto model is used
+        in: body
+        name: UnblockSportsForOP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UnblockedSportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UnblockedSportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.UnblockedSportRespDto'
+      summary: Unblock Sport For OP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/add-partner:
+    post:
+      consumes:
+      - application/json
+      description: Adding a partner to an operator
+      parameters:
+      - description: AddPartnerReqDto model is used
+        in: body
+        name: add-partner
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddPartnerReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Operator Partner
+      tags:
+      - Portal-PlatformAdmin
+  /portal/sapadmin/block-competition:
+    post:
+      consumes:
+      - application/json
+      description: Block Competitions of an SAP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BlockedCompReqDto model is used
+        in: body
+        name: BlockCompetitionForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BlockedCompReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BlockedCompResqDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.BlockedCompResqDto'
+      summary: Block Competitions
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/block-event:
+    post:
+      consumes:
+      - application/json
+      description: Block Events of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BlockedEventReqDto model is used
+        in: body
+        name: BlockEventForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BlockedEventReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BlockedEventResqDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.BlockedEventResqDto'
+      summary: Block Events
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/block-market:
+    post:
+      consumes:
+      - application/json
+      description: Blocking a Market by Platform Admin
+      parameters:
+      - description: UpdateMarketsReqDto model is used
+        in: body
+        name: BlockMarketForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Blocking a Market by Platform Admin
+      tags:
+      - Portal-PlatformAdmin
+  /portal/sapadmin/block-op-market:
+    post:
+      consumes:
+      - application/json
+      description: Blocking an Operator Market by Platform Admin
+      parameters:
+      - description: UpdateOpMarketsReqDto model is used
+        in: body
+        name: BlockOPMarketForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateOpMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Blocking an Operator Market by Platform Admin
+      tags:
+      - Portal-PlatformAdmin
+  /portal/sapadmin/competition-operator-status:
+    post:
+      consumes:
+      - application/json
+      description: Update Status of Operator with respect to Competition in SAP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: OperStatusInCompetitionReqDto model is used
+        in: body
+        name: OperatorStatusInCompetitionForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/commondto.OperStatusInCompetitionReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commondto.OperStatusRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/commondto.OperStatusRespDto'
+      summary: Update Status of Operator with respect to Competition in SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/compititions:
+    post:
+      consumes:
+      - application/json
+      description: List All Competitions of an SAP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: CompReqDto model is used
+        in: body
+        name: GetCompetitionsListForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CompReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CompRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CompRespDto'
+      summary: Get Competitions
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/event-operator-status:
+    post:
+      consumes:
+      - application/json
+      description: Update Status of Operator with respect to Event in SAP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: OperStatusInEventReqDto model is used
+        in: body
+        name: OperatorStatusInEventForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/commondto.OperStatusInEventReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commondto.OperStatusRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/commondto.OperStatusRespDto'
+      summary: Update Status of Operator with respect to Event in SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/events:
+    post:
+      consumes:
+      - application/json
+      description: List All Events of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GetEventsReqDto model is used
+        in: body
+        name: GetEventsListForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/Sp_dto_portal.GetEventsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetEventsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetEventsRespDto'
+      summary: Get Events
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/get-bets:
+    post:
+      consumes:
+      - application/json
+      description: List All Bets of SAPAdmin. Pagination is present. A maximum of
+        50 Users in a single request.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BetsHistoryReqDto model is used
+        in: body
+        name: GetBetsForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.BetsHistoryReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+      summary: Get Bets for SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/get-cancelled-bets:
+    post:
+      consumes:
+      - application/json
+      description: List Lapsed Bets of SAPAdmin. Pagination is present. A maximum
+        of 50 Users in a single request.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BetsHistoryReqDto model is used
+        in: body
+        name: GetCancelledBetsForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.BetsHistoryReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+      summary: Get Lapsed Bets for SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/get-lapsed-bets:
+    post:
+      consumes:
+      - application/json
+      description: List Lapsed Bets of SAPAdmin. Pagination is present. A maximum
+        of 50 Users in a single request.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BetsHistoryReqDto model is used
+        in: body
+        name: GetLapsedBetsForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.BetsHistoryReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+      summary: Get Lapsed Bets for SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/get-markets:
+    post:
+      consumes:
+      - application/json
+      description: Get all Markets for an event by Platform Admin
+      parameters:
+      - description: GetMarketsReqDto model is used
+        in: body
+        name: GetMarketsForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/Sp_dto_portal.GetMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetMarketsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/Sp_dto_portal.GetMarketsRespDto'
+      summary: GetMarkets by Platform Admin
+      tags:
+      - Portal-PlatformAdmin
+  /portal/sapadmin/get-op-markets:
+    post:
+      consumes:
+      - application/json
+      description: Get all Markets for a market by Platform Admin
+      parameters:
+      - description: GetOpMarketsReqDto model is used
+        in: body
+        name: GetOpMarketsForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.GetOpMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.GetMarketStatusRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.GetMarketStatusRespDto'
+      summary: GetMarkets by Platform Admin
+      tags:
+      - Portal-PlatformAdmin
+  /portal/sapadmin/get-settled-bets:
+    post:
+      consumes:
+      - application/json
+      description: List Settled Bets of SAPAdmin. Pagination is present. A maximum
+        of 50 Users in a single request.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BetsHistoryReqDto model is used
+        in: body
+        name: GetSettledBetsForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.BetsHistoryReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/operatordto.BetsHistoryRespDto'
+      summary: Get Settled Bets for SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/list-users:
+    post:
+      consumes:
+      - application/json
+      description: List All Users of an SAPAdmin. Pagination is present. A maximum
+        of 50 Users in a single request.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GetUsersReqDto model is used
+        in: body
+        name: GetUsersForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.GetUsersReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ListUsersRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.ListUsersRespDto'
+      summary: List All Users
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/operator-details:
+    post:
+      consumes:
+      - application/json
+      description: List Operator of specific Tab for SAP. Pagination is present.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GetOperDetailReqDto model is used
+        in: body
+        name: OperatorDetailsForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/commondto.GetOperDetailReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commondto.GetOperDetailRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/commondto.GetOperDetailRespDto'
+      summary: Get Operator Details form the status tables for SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/operator-status-unblock:
+    post:
+      consumes:
+      - application/json
+      description: Get Operator Status  Block form the status tables for SAP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: OperStatusUnblockReqDto model is used
+        in: body
+        name: OperatorStatusUnblockForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/commondto.OperStatusUnblockReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commondto.OperStatusUnblockRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/commondto.OperStatusUnblockRespDto'
+      summary: Get Operator Status  Block form the status tables for SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/provider-operator-status:
+    post:
+      consumes:
+      - application/json
+      description: Update Status of Operator with respect to providers in SAP
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: OperStatusInProviderReqDto model is used
+        in: body
+        name: OperatorStatusInProviderForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/commondto.OperStatusInProviderReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commondto.OperStatusRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/commondto.OperStatusRespDto'
+      summary: Update Status of Operator with respect to providers in SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/recent-compititions:
+    post:
+      consumes:
+      - application/json
+      description: List All Recent Competitions of an SAP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: CompReqDto model is used
+        in: body
+        name: GetCompetitionsListForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CompReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CompRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CompRespDto'
+      summary: Get Recent Competitions
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/resume-market:
+    post:
+      consumes:
+      - application/json
+      description: Resuming a Market by Platform Admin
+      parameters:
+      - description: UpdateMarketsReqDto model is used
+        in: body
+        name: ResumeMarketForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Resuming a Market by Platform Admin
+      tags:
+      - Portal-PlatformAdmin
+  /portal/sapadmin/sport-operator-status:
+    post:
+      consumes:
+      - application/json
+      description: Update Status of Operator with respect to Sport in SAP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: OperStatusInSportReqDto model is used
+        in: body
+        name: OperatorStatusInSportForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/commondto.OperStatusInSportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/commondto.OperStatusRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/commondto.OperStatusRespDto'
+      summary: Update Status of Operator with respect to Sport in SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/suspend-market:
+    post:
+      consumes:
+      - application/json
+      description: Suspending a Market by Platform Admin
+      parameters:
+      - description: UpdateMarketsReqDto model is used
+        in: body
+        name: SuspendMarketForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Suspending a Market by Platform Admin
+      tags:
+      - Portal-PlatformAdmin
+  /portal/sapadmin/unblock-competition:
+    post:
+      consumes:
+      - application/json
+      description: Unblock Competitions of an SAP.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: UnblockedCompReqDto model is used
+        in: body
+        name: UnblockCompetitionForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UnblockedCompReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UnblockedCompResqDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.UnblockedCompResqDto'
+      summary: Unblock Competitions
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/unblock-event:
+    post:
+      consumes:
+      - application/json
+      description: Unblock Events of an operator.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: UnblockedEventReqDto model is used
+        in: body
+        name: UnblockEventForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UnblockedEventReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UnblockedEventResqDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.UnblockedEventResqDto'
+      summary: Unblock Events
+      tags:
+      - Portal-OperatorAdmin
+  /portal/sapadmin/unblock-market:
+    post:
+      consumes:
+      - application/json
+      description: Unblocking a Market by Platform Admin
+      parameters:
+      - description: UpdateMarketsReqDto model is used
+        in: body
+        name: UnblockMarketForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Unblocking a Market by Platform Admin
+      tags:
+      - Portal-PlatformAdmin
+  /portal/sapadmin/unblock-op-market:
+    post:
+      consumes:
+      - application/json
+      description: Unblocking an Operator Market by Platform Admin
+      parameters:
+      - description: UpdateOpMarketsReqDto model is used
+        in: body
+        name: UnblockOPMarketForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateOpMarketsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: Unblocking an Operator Market by Platform Admin
+      tags:
+      - Portal-PlatformAdmin
+  /portal/sapadmin/user-statement:
+    post:
+      consumes:
+      - application/json
+      description: List Transactions of All user for SAP. Pagination is present. A
+        maximum of 50 Transactions in a single request.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: UserStatementReqDto model is used
+        in: body
+        name: UserStatementForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserStatementReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.UserStatementRespDto'
+      summary: Get All User Statement for SAP
+      tags:
+      - Portal-OperatorAdmin
+  /portal/user-statement:
+    post:
+      consumes:
+      - application/json
+      description: List Transactions of a user. Pagination is present. A maximum of
+        50 Transactions in a single request.
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: UserStatementReqDto model is used
+        in: body
+        name: UserStatement
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserStatementReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.UserStatementRespDto'
+      summary: Get User Statement
+      tags:
+      - Portal-OperatorAdmin
+  /reports/get-admin-statement:
+    post:
+      consumes:
+      - application/json
+      description: Admin Statement API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: AdminStatementReqDto model is used
+        in: body
+        name: AdminStatement
+        required: true
+        schema:
+          $ref: '#/definitions/reports.AdminStatementReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.AdminStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.AdminStatementRespDto'
+      summary: Admin Statement API
+      tags:
+      - Reports
+  /reports/get-bet-detail-report:
+    post:
+      consumes:
+      - application/json
+      description: Get Bet Details Report Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BetDetailReportReqDto model is used
+        in: body
+        name: BetDetailReport
+        required: true
+        schema:
+          $ref: '#/definitions/reports.BetDetailReportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.BetDetailReportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.BetDetailReportRespDto'
+      summary: Get Bet Details Report Report API
+      tags:
+      - Reports
+  /reports/get-bet-list:
+    post:
+      consumes:
+      - application/json
+      description: Bet List Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: BetListReqDto model is used
+        in: body
+        name: BetList
+        required: true
+        schema:
+          $ref: '#/definitions/reports.BetListReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.BetListRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.BetListRespDto'
+      summary: Bet List Report API
+      tags:
+      - Reports
+  /reports/get-competition-pnl-report:
+    post:
+      consumes:
+      - application/json
+      description: Event Pnl Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: EventPnLReportReqDto model is used
+        in: body
+        name: EventPnLReport
+        required: true
+        schema:
+          $ref: '#/definitions/reports.EventPnLReportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.EventPnLReportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.EventPnLReportRespDto'
+      summary: Event Pnl Report API
+      tags:
+      - Reports
+  /reports/get-game-report:
+    post:
+      consumes:
+      - application/json
+      description: My Game Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: GameReportReqDto model is used
+        in: body
+        name: GameReport
+        required: true
+        schema:
+          $ref: '#/definitions/reports.GameReportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.GameReportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.GameReportRespDto'
+      summary: My Game Report API
+      tags:
+      - Reports
+  /reports/get-my-account-statement:
+    post:
+      consumes:
+      - application/json
+      description: My Account Statement API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: MyAccStatementReqDto model is used
+        in: body
+        name: MyAccountStatement
+        required: true
+        schema:
+          $ref: '#/definitions/reports.MyAccStatementReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.MyAccStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.MyAccStatementRespDto'
+      summary: My Account Statement API
+      tags:
+      - Reports
+  /reports/get-operator-risk-report:
+    post:
+      consumes:
+      - application/json
+      description: Get Market Risk Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: RiskReportReqDto model is used
+        in: body
+        name: GetMarketRiskReport
+        required: true
+        schema:
+          $ref: '#/definitions/reports.RiskReportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.RiskReportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.RiskReportRespDto'
+      summary: Get Market Risk Report API
+      tags:
+      - Reports
+  /reports/get-pnl-report:
+    post:
+      consumes:
+      - application/json
+      description: Profit and Loss Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: PnLReportReqDto model is used
+        in: body
+        name: GameReport
+        required: true
+        schema:
+          $ref: '#/definitions/reports.PnLReportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.PnLReportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.PnLReportRespDto'
+      summary: Profit and Loss Report API
+      tags:
+      - Reports
+  /reports/get-provider-pnl-report:
+    post:
+      consumes:
+      - application/json
+      description: Provider Pnl Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: ProviderPnLReportReqDto model is used
+        in: body
+        name: ProviderPnLReport
+        required: true
+        schema:
+          $ref: '#/definitions/reports.ProviderPnLReportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.ProviderPnLReportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.ProviderPnLReportRespDto'
+      summary: Provider Pnl Report API
+      tags:
+      - Reports
+  /reports/get-sport-pnl-report:
+    post:
+      consumes:
+      - application/json
+      description: Sports Pnl Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: SportPnLReportReqDto model is used
+        in: body
+        name: SportPnLReport
+        required: true
+        schema:
+          $ref: '#/definitions/reports.SportPnLReportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.SportPnLReportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.SportPnLReportRespDto'
+      summary: Sports Pnl Report API
+      tags:
+      - Reports
+  /reports/get-transfer-user-statement:
+    post:
+      consumes:
+      - application/json
+      description: Get Transfer User Statement API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: TransferUserStatementReqDto model is used
+        in: body
+        name: TransferUserStatement
+        required: true
+        schema:
+          $ref: '#/definitions/reports.TransferUserStatementReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.TransferUserStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.TransferUserStatementRespDto'
+      summary: Get Transfer User Statement API
+      tags:
+      - Reports
+  /reports/get-user-audit-report:
+    post:
+      consumes:
+      - application/json
+      description: Get User Audit Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: UserAuditReportReqDto model is used
+        in: body
+        name: GetUserAuditReport
+        required: true
+        schema:
+          $ref: '#/definitions/reports.UserAuditReportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.UserAuditReportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.UserAuditReportRespDto'
+      summary: Get User Audit Report API
+      tags:
+      - Reports
+  /reports/get-user-book-report:
+    post:
+      consumes:
+      - application/json
+      description: Get User Book Report API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: UserBookReportReqDto model is used
+        in: body
+        name: GetUserBookReport
+        required: true
+        schema:
+          $ref: '#/definitions/reports.UserBookReportReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.UserBookReportRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.UserBookReportRespDto'
+      summary: Get User Book Report API
+      tags:
+      - Reports
+  /reports/get-user-statement:
+    post:
+      consumes:
+      - application/json
+      description: User Statement API
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: UserStatementReqDto model is used
+        in: body
+        name: Statement
+        required: true
+        schema:
+          $ref: '#/definitions/reports.UserStatementReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/reports.UserStatementRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/reports.UserStatementRespDto'
+      summary: User Statement API
+      tags:
+      - Reports
+  /sapadmin/get-new-sports:
+    post:
+      consumes:
+      - application/json
+      description: To add new sports to SAP Platform from a given provider
+      parameters:
+      - description: SyncSportsReqDto model is used
+        in: body
+        name: GetNewSports
+        required: true
+        schema:
+          $ref: '#/definitions/commondto.SyncSportsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.CommonPortalRespDto'
+      summary: To Get New Sports from Provider
+      tags:
+      - Portal-PlatformAdmin
+  /sapadmin/get-open-bets:
+    post:
+      consumes:
+      - application/json
+      description: Get Open Bets For SAP
+      parameters:
+      - description: OpenBetsReqDto model is used
+        in: body
+        name: GetOpenBetsForSAP
+        required: true
+        schema:
+          $ref: '#/definitions/dto.OpenBetsReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.OpenBetsRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/dto.OpenBetsRespDto'
+      summary: Get Open Bets For SAP
+      tags:
+      - Portal-PlatformAdmin
+  /test/pagination-report:
+    post:
+      consumes:
+      - application/json
+      description: bring bets data from database.
+      parameters:
+      - description: BetsReportReq model is used
+        in: body
+        name: PaginationReport
+        required: true
+        schema:
+          $ref: '#/definitions/requestdto.BetsReportReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsedto.BetReportResp'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/responsedto.BetReportResp'
+      summary: PaginationReport is a function to bring data from database
+      tags:
+      - Test-Service
+  /wallet/deposit-funds:
+    post:
+      consumes:
+      - application/json
+      description: To add funds to user balance
+      parameters:
+      - description: DepositReqDto model is used
+        in: body
+        name: Login
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.DepositReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/operatordto.DepositRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/operatordto.DepositRespDto'
+      summary: User Deposit Funds API
+      tags:
+      - Wallet-Service
+  /wallet/user-balance:
+    post:
+      consumes:
+      - application/json
+      description: To get current user balance
+      parameters:
+      - description: UserBalanceReqDto model is used
+        in: body
+        name: Login
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.UserBalanceReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/operatordto.UserBalanceRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/operatordto.UserBalanceRespDto'
+      summary: User Balance API
+      tags:
+      - Wallet-Service
+  /wallet/withdraw-funds:
+    post:
+      consumes:
+      - application/json
+      description: To withdraw funds from user balance
+      parameters:
+      - description: WithdrawReqDto model is used
+        in: body
+        name: Login
+        required: true
+        schema:
+          $ref: '#/definitions/operatordto.WithdrawReqDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/operatordto.WithdrawRespDto'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/operatordto.WithdrawRespDto'
+      summary: User Withdraw Funds API
+      tags:
+      - Wallet-Service
+swagger: "2.0"

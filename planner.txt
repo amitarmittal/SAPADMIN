@@ -1,0 +1,274 @@
+// B2B Service
+    // iFrame communication
+    APIs
+        GetSports - 
+        GetEvents - 
+        GetLiveEvents - 
+        GetMarkets - 
+        SportsBet - 
+        SportsBetCancel - 
+        SportsOpenBets - 
+        GetLiveStreamUrl - 
+
+    Sockets
+        Odds - 
+        Events - 
+        OpenBets - 
+
+    // Operator communication
+    APIs
+        Login - 
+        GetBetDetails - 
+
+    Wallet Integration
+        GetBalance
+        Bet-Placement
+        Bet-Result
+        Bet-Rollback
+
+    // Provider communication
+    Odds Feed
+        GetEvents - 
+        GetMarkets - 
+        GetResults - 
+
+    Provider Bets
+        Bet-Placement - 
+        Bet-Cancel - 
+        Bet-Open - 
+        Bet-Details - 
+
+// Control Panel
+    // Auth
+        Login - 
+
+    // Administration
+        GetSports - 
+        BlockSport - 
+        UnblockSport - 
+
+        GetProviders - 
+        BlockProvider - 
+        UnblockProvider - 
+
+        GetBetFair
+
+
+30/08/2021:
+1.  Events List update in Database
+    - Whenever there is a GetEvents or GetLiveEvents call, try to add missing events into the Database
+    - Maintain the cache as well to avoid DB reads & retryWrites
+    - if a particular event is present in the cache means, it is present in the database too
+    - if a particular event is not present in the cache, go to databse and check for its presence
+        - if it presents in the database, update cache too
+        - if it not present in the database, add to the database and add to the cache
+    - When do we use data in cache???
+        - When user place a bet?
+
+TODO:
+    - Bet Placement***
+        - Verify Odds - Done
+        - Save Market if not present (async) - Done
+        - Save Bet if success response from operator - Done
+        - Send response to iFrame - Done
+        - Define Response Object - Done
+    - Open Bets***
+        - API Endpoint - Done
+        - Query - Done
+        - Response Object - Done
+    - User Balance***
+        - API Endpoint - Done
+        - Response Object - Done
+    - Transfer Wallet
+        - User Balance - Done
+        - User Ledger - Done
+        - Logic to handle
+            - Deposit Funds - Done
+            - Withdraw Funds - Done
+            - Bet Placement - Done
+            - Bet Result - Done
+            - Bet Rollback 
+    - Result
+        - API Endpoint - Done
+        - Update result object - Done
+        - Query all bets - Done
+        - Process all bets async - Done
+    - Cancel
+        - API Endpoint
+        - Update result object
+        - Query all bets
+        - Process all bets in async
+        - Retry mechanism
+    - B2B Users creation
+        - DB document design - Done
+        - GET/INSERT/UPDATE Operations - Done
+        - Get Users Endpoint - Done
+        - Block User Endpoint
+        - Unblock User Endpoint
+    - DB Migration
+    - Retry Mechanism
+
+
+import "go.mongodb.org/mongo-driver/mongo"
+
+clientOptions := options.Client().
+    ApplyURI("mongodb+srv://app-user-01:<password>@devcluster.3hcqa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+defer cancel()
+client, err := mongo.Connect(ctx, clientOptions)
+if err != nil {
+    log.Fatal(err.Error())
+}
+
+
+type OperatorBetRequest struct {
+	OperatorId    string  `json:"operatorId"`
+	OperatorToken string  `json:"token"`
+	ProviderName  string  `json:"providerName"`
+	UserId        string  `json:"userId"`
+	ReqId         string  `json:"reqId"`
+	TransactionId string  `json:"transactionId"`
+	TableId       string  `json:"tableId"`
+	RoundId       string  `json:"roundId"`
+	DebitAmount   float64 `json:"debitAmount"`
+}
+
+type OperatorResultRequest struct {
+	OperatorId    string  `json:"operatorId"`
+	OperatorToken string  `json:"token"`
+	UserId        string  `json:"userId"`
+	ReqId         string  `json:"reqId"`
+	TransactionId string  `json:"transactionId"`
+	TableId       string  `json:"tableId"`
+	RoundId       string  `json:"roundId"`
+	CreditAmount  float64 `json:"creditAmount"`
+}
+
+type OperatorRollBackRequest struct {
+	OperatorId     string  `json:"operatorId"`
+	UserId         string  `json:"userId"`
+	OperatorToken  string  `json:"token"`
+	ReqId          string  `json:"reqId"`
+	TransactionId  string  `json:"transactionId"`
+	TableId        string  `json:"tableId"`
+	RoundId        string  `json:"roundId"`
+	RollbackAmount float64 `json:"rollbackAmount"`
+}
+
+// Completed Tasks
+1. Enforce Market Status (Active/Blocked & Suspend/Resume) - important
+2. Net Amount in Bets
+3. MPC1 BetFair & Dream Mix - important
+4. Generic Wallet Market Result implementation - important
+
+// Pending Tasks
+2. Database Pagination Query
+3. PartnerId for Sports
+4. Market Suspend Resume integration with L1 - important
+5. BetFair Operator Level Exposure
+6. BetFair User Level Exposure
+7. BetFair Market Level P&L
+9. BetFair PlaceOrder & CancelOrder
+10. Use Replace Bets in place of Update Bets
+11. Retry mechanism for failed wallet transactions
+12. Commission per Market
+    12.1. Commission per market per user
+    12.2. Commission per market per operator
+    12.3. Commission per market per SAP
+13. Exposure per Market
+    12.1. Exposure per market per user for only for transfer wallet
+    12.2. Commission per market per operator
+
+User Table:
+1. OperatorId
+2. UserId
+3. ProviderId
+4. SportId
+5. CompetitionId
+6. EventId
+7. MarketId
+8. Exposures[]
+    8.1. RunnerID
+    8.2. Exposure
+9. Winner
+10. Winning Amount
+11. Commission
+
+Operator Table:
+1. OperatorId
+2. ProviderId
+3. SportId
+4. CompetitionId
+5. EventId
+6. MarketId
+7. Exposures
+    8.1. RunnerID
+    8.2. Exposure
+8. Winner
+9. Winning Amount
+10. Commission
+
+
+
+#Commission - Only for BetFair
+1. Take two percent commission in every winning
+2. Maintain Bet level commission in every winning
+3. Maintain Market level commission in user market
+4. Credit excess commission using wallet result call????
+
+#implementatition
+1. Bet Placement
+    . Set it to ZERO
+
+2. Bet Result
+    . Set to 2% of net winning if net winning is > 0
+
+3. Bet Rollback / Cancel / void / expire
+    . Set it to ZERO
+
+4. Scheduler - every minute
+    . Aquire Lock
+    . Get Markets which are settled in last 1 Hour
+    . Create unique market IDs List - marketList1
+    . Get OPEN Bets list from DB filtered by marketList1
+    . Prepare a market IDs list which has ZERO OPEN bets - marketList2
+    . Get SETTLED Bets list from DB filtered by marketList2
+    . Loop through bets and calculate commission per user - commissionUserMap
+    . Do WalletResult call to notify commission correction per user & Update winning amount and commission
+    . Release Lock
+
+
+Stage - $2a$08$kIcNedEXunxOvnPKsQ8yquTpNlxrtn.GKJnWdZIyCWe898WcIsXAq
+Prod - $2a$08$Dr2MOPiiYXxXahEMZaWldeG.mx1Rq6HX0dmsOo9.R.e1bnA8DHFrO
+
+	if os.Getenv("DATABASE_CLUSTER") == "" {
+		ClusterName = "ezugi"
+		Sports01DBName = "sports01"
+		UserName = "satya"
+		UserPswd = "ecYuTiv8tjFsv8Jo"
+		ConnectionURL2 = "mongodb+srv://%s:%s@%s.mdwax.mongodb.net/%s?retryWrites=true&w=majority"
+	}
+
+
+BetFair Integration Module:
+1. Login - Initialization
+2. Keep Alive - Scheduler - 1hr
+3. Place Order async
+4. Current Order(s)
+5. Cleared Order(s)
+6. Cancel Order(s) (async)
+
+
+Current Orders Response:
+BetFairModule: CurrentOrders: response data is -  {"currentOrders":[{"betId":"263129142541","marketId":"1.196731456","selectionId":5790034,"handicap":0.0,"priceSize":{"price":4.0,"size":0.08},"bspLiability":0.0,"side":"BACK","status":"EXECUTABLE","persistenceType":"PERSIST","orderType":"LIMIT","placedDate":"2022-03-30T19:15:46.000Z","averagePriceMatched":0.0,"sizeMatched":0.0,"sizeRemaining":0.08,"sizeLapsed":0.0,"sizeCancelled":0.0,"sizeVoided":0.0,"regulatorCode":"MALTA LOTTERIES AND GAMBLING AUTHORITY","customerOrderRef":"32c7becbd5a24a05a088370487637bc8"}],"moreAvailable":false}
+
+ClearedOrders Response:
+BetFairModule: ClearedOrders: response data is -  {"clearedOrders":[{"eventTypeId":"1","eventId":"31339102","marketId":"1.196909916","selectionId":58805,"handicap":0.0,"betId":"263130701866","placedDate":"2022-03-30T19:37:58.000Z","persistenceType":"PERSIST","orderType":"LIMIT","side":"BACK","betOutcome":"LOST","priceRequested":4.0,"settledDate":"2022-03-30T20:25:08.000Z","lastMatchedDate":"2022-03-30T19:55:41.000Z","betCount":1,"priceMatched":4.0,"priceReduced":false,"sizeSettled":0.08,"profit":-0.08,"customerOrderRef":"3fda0ee967d94aceb07eb8c918aa32a8"}],"moreAvailable":false}
+
+
+
+BetFair Settlement cases:
+#1 BACK Bet same Odds & Better Odds and no stake change
+#2 LAY Bet same Odds & Better Odds and no stake change
+#3 BACK Bet same Odds & Better Odds and stake changed
+#4 LAY Bet same Odds & Better Odds and stake changed 

@@ -1,0 +1,50 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo "Install Phase - Nothing to do using latest Amazon Linux Docker Image for CodeBuild which has all AWS Tools - https://github.com/aws/aws-codebuild-docker-images/blob/master/al2/x86_64/standard/3.0/Dockerfile"
+  pre_build:
+    commands:
+      - TAG="$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
+      - REPOID=${REPOSITORY_URI//\/*}
+      - echo "Update Image tag in kube-manifest..."
+      - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI_IMAGE:$TAG"'@' manifests/deployment.yml
+      - sed -i 's@LAYER2_URL@'"$LAYER2_URL"'@' manifests/deployment.yml
+      - sed -i 's@LAYER3_IFRAME@'"$LAYER3_IFRAME"'@' manifests/deployment.yml
+      - sed -i 's@DB_CLUSTER@'"$DB_CLUSTER"'@' manifests/deployment.yml
+      - sed -i 's@DB_NAME@'"$DB_NAME"'@' manifests/deployment.yml
+      - sed -i 's@DB_USER@'"$DB_USER"'@' manifests/deployment.yml
+      - sed -i 's@DB_PWD@'"$DB_PWD"'@' manifests/deployment.yml
+      - sed -i 's@REPLICAS@'"$REPLICAS"'@' manifests/deployment.yml
+      - sed -i 's@SAP_NAMESPACE@'"$SAP_NAMESPACE"'@' manifests/deployment.yml
+      - sed -i 's@L1_SR_URL@'"$L1_SR_URL"'@' manifests/deployment.yml
+      - sed -i 's@BF_USR@'"$BF_USR"'@' manifests/deployment.yml
+      - sed -i 's@BF_PD@'"$BF_PD"'@' manifests/deployment.yml
+      - sed -i 's@BF_APPKEY@'"$BF_APPKEY"'@' manifests/deployment.yml
+      - sed -i 's@BB_DREAM_L2_P@'"$BB_DREAM_L2_P"'@' manifests/deployment.yml
+      - sed -i 's@KF_BF_L2_P@'"$KF_BF_L2_P"'@' manifests/deployment.yml
+      - sed -i 's@REPOSITORY@'"$REPOID"'@' Dockerfile
+      - sed -i 's@KF_BF_L2_P@'"$KF_BF_L2_P"'@' manifests/deployment.yml
+      - sed -i 's@BB_DREAM_L2_P@'"$BB_DREAM_L2_P"'@' manifests/deployment.yml
+      - cat manifests/deployment.yml
+      - echo "Verify AWS CLI Version..."
+      - aws --version
+      - export KUBECONFIG=$HOME/.kube/config
+  build:
+    commands:
+      - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
+      - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
+      - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
+      - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
+      - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
+      - echo "Login in to Amazon ECR..."
+      - $(aws ecr get-login --no-include-email --region eu-west-2)
+      - docker build --tag $REPOSITORY_URI_IMAGE:$TAG .
+      - docker push $REPOSITORY_URI_IMAGE:$TAG
+      - echo "Update Kube Config"
+      - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
+      - kubectl get nodes
+      - echo "Apply changes to kube manifests"
+      - ls     
+      - kubectl apply -f manifests
+      - echo "Completed applying changes to Kubernetes Objects"
