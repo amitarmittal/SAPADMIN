@@ -1,7 +1,6 @@
 package router
 
 import (
-	"Sp/handler"
 	cachesvc "Sp/handler/cache"
 	operatorsvc "Sp/handler/operator"
 	portalsvc "Sp/handler/portal"
@@ -20,7 +19,6 @@ func SetupRoutes(app *fiber.App) {
 
 	apiv1 := api.Group(("/v1"))
 
-	api.Get("/", handler.Hello)
 	app.Use(logger.New(logger.Config{
 		Format:     "${cyan}[${time}] ${green}${pid} ${red}${status} ${blue}[${method}] ${white}${path}\n",
 		TimeFormat: "02-Jan-2006",
