@@ -4,6 +4,7 @@ import (
 	"Sp/database"
 	_ "Sp/docs"
 	"Sp/router"
+	"Sp/routines"
 	"log"
 	"os"
 
@@ -11,6 +12,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/pprof"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/robfig/cron"
 )
 
 func loggerFunction() {
@@ -37,6 +39,10 @@ func main() {
 	app.Use(cors.New())
 	app.Use(pprof.New())
 	database.ConnectDB()
+	routines.Initialization()
+	c := cron.New()
+	c.AddFunc("40 0-59/1 * * * *", func() { routines.RefreshCache() }) // runs for every minute, 40th Second
+	c.Start()
 	// Setup Routes
 	router.SetupRoutes(app)
 	// Start app
